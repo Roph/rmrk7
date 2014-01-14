@@ -1,0 +1,77 @@
+Allowing avatar display on message index: In Sources/MessageIndex.php:
+
+Find:
+
+			// 'Print' the topic info.
+			$context['topics'][$row['id_topic']] = array(
+				'id' => $row['id_topic'],
+				'first_post' => array(
+					'id' => $row['id_first_msg'],
+					'member' => array(
+						'username' => $row['first_member_name'],
+						'name' => $row['first_display_name'],
+						'id' => $row['first_id_member'],
+						'href' => !empty($row['first_id_member']) ? $scripturl . '?action=profile;u=' . $row['first_id_member'] : '',
+						'link' => !empty($row['first_id_member']) ? '<a href="' . $scripturl . '?action=profile;u=' . $row['first_id_member'] . '" title="' . $txt['profile_of'] . ' ' . $row['first_display_name'] . '">' . $row['first_display_name'] . '</a>' : $row['first_display_name']
+					),
+					'time' => timeformat($row['first_poster_time']),
+					'timestamp' => forum_time(true, $row['first_poster_time']),
+					'subject' => $row['first_subject'],
+					'preview' => $row['first_body'],
+					'icon' => $row['first_icon'],
+					'icon_url' => $settings[$context['icon_sources'][$row['first_icon']]] . '/post/' . $row['first_icon'] . '.gif',
+					'href' => $scripturl . '?topic=' . $row['id_topic'] . '.0',
+					'link' => '<a href="' . $scripturl . '?topic=' . $row['id_topic'] . '.0">' . $row['first_subject'] . '</a>'
+				),
+
+Replace with:
+
+			// 'Print' the topic info.
+			global $memberContext;
+			if (!isset($memberContext[$row['first_id_member']]))
+			{
+				loadMemberData(array($row['first_id_member']), false, 'normal');
+				loadMemberContext($row['first_id_member']);
+			}
+			elseif (!isset($memberContext[$row['last_id_member']]))
+			{
+				loadMemberData(array($row['last_id_member']), false, 'normal');
+				loadMemberContext($row['last_id_member']);
+			}
+			$context['topics'][$row['id_topic']] = array(
+				'id' => $row['id_topic'],
+				'first_post' => array(
+					'id' => $row['id_first_msg'],
+					'member' => array(
+						'username' => $row['first_member_name'],
+						'name' => $row['first_display_name'],
+						'id' => $row['first_id_member'],
+						'href' => !empty($row['first_id_member']) ? $scripturl . '?action=profile;u=' . $row['first_id_member'] : '',
+						'link' => !empty($row['first_id_member']) ? '<a href="' . $scripturl . '?action=profile;u=' . $row['first_id_member'] . '" title="' . $txt['profile_of'] . ' ' . $row['first_display_name'] . '">' . $row['first_display_name'] . '</a>' : $row['first_display_name'],
+						'avatar' => !empty($memberContext[$row['first_id_member']]['avatar']['image']) ? $memberContext[$row['first_id_member']]['avatar'] : ''
+					),
+					'time' => timeformat($row['first_poster_time']),
+					'timestamp' => forum_time(true, $row['first_poster_time']),
+					'subject' => $row['first_subject'],
+					'preview' => $row['first_body'],
+					'icon' => $row['first_icon'],
+					'icon_url' => $settings[$context['icon_sources'][$row['first_icon']]] . '/post/' . $row['first_icon'] . '.gif',
+					'href' => $scripturl . '?topic=' . $row['id_topic'] . '.0',
+					'link' => '<a href="' . $scripturl . '?topic=' . $row['id_topic'] . '.0">' . $row['first_subject'] . '</a>'
+				),
+				
+==============================================================================================================================================
+
+Allowing a border around online list usernames, define a border colour in Sources/Subs-MembersOnline.php: 
+
+Find:
+
+// Some basic color coding...
+		if (!empty($row['online_color']))
+			$link = '<a href="' . $scripturl . '?action=profile;u=' . $row['id_member'] . '" style="color: ' . $row['online_color'] . ';">' . $row['real_name'] . '</a>';
+			
+Replace with:
+
+// Some basic color coding...
+		if (!empty($row['online_color']))
+			$link = '<a href="' . $scripturl . '?action=profile;u=' . $row['id_member'] . '" style="color: ' . $row['online_color'] . '; border-color: ' . $row['online_color'] . '">' . $row['real_name'] . '</a>';
