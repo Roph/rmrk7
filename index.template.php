@@ -87,7 +87,8 @@ function template_html_above()
 	// The ?fin20 part of this link is just here to make sure browsers don't cache it wrongly.
 	echo '
 	<link rel="stylesheet" type="text/css" href="', $settings['theme_url'], '/css/index', $context['theme_variant'], '.css?fin20" />
-	<link href="http://fonts.googleapis.com/css?family=Titillium+Web:400,700|Alegreya+Sans:400,700" rel="stylesheet" type="text/css">';
+	<link href="http://fonts.googleapis.com/css?family=Titillium+Web:400,700|Alegreya+Sans:400,700" rel="stylesheet" type="text/css">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>';
 
 	// Some browsers need an extra stylesheet due to bugs/compatibility issues.
 	foreach (array('ie7', 'ie6', 'webkit') as $cssfix)
@@ -177,76 +178,36 @@ function template_body_above()
 		<div id="top_section">
 			<a href="', $scripturl, '" id="logo"></a>';
 			
-	// Show the menu here, according to the menu sub template.
-	template_menu();
-
-	echo '
-		</div>
-		<div id="upper_section" class="middletext">
-			<div class="user">';
-
-	// If the user is logged in, display stuff like their name, new messages, etc.
-	if ($context['user']['is_logged'])
-	{
-		if (!empty($context['user']['avatar']))
+			//RMRK7 Upper right Search / User section
 			echo '
-				<p class="avatar">', $context['user']['avatar']['image'], '</p>';
-		echo '
-				<ul class="reset">
-					<li class="greeting">', $txt['hello_member_ndt'], ' <span>', $context['user']['name'], '</span></li>
-					<li><a href="', $scripturl, '?action=unread">', $txt['unread_since_visit'], '</a></li>
-					<li><a href="', $scripturl, '?action=unreadreplies">', $txt['show_unread_replies'], '</a></li>';
-
-		// Is the forum in maintenance mode?
-		if ($context['in_maintenance'] && $context['user']['is_admin'])
-			echo '
-					<li class="notice">', $txt['maintain_mode_on'], '</li>';
-
-		// Are there any members waiting for approval?
-		if (!empty($context['unapproved_members']))
-			echo '
-					<li>', $context['unapproved_members'] == 1 ? $txt['approve_thereis'] : $txt['approve_thereare'], ' <a href="', $scripturl, '?action=admin;area=viewmembers;sa=browse;type=approve">', $context['unapproved_members'] == 1 ? $txt['approve_member'] : $context['unapproved_members'] . ' ' . $txt['approve_members'], '</a> ', $txt['approve_members_waiting'], '</li>';
-
-		if (!empty($context['open_mod_reports']) && $context['show_open_reports'])
-			echo '
-					<li><a href="', $scripturl, '?action=moderate;area=reports">', sprintf($txt['mod_reports_waiting'], $context['open_mod_reports']), '</a></li>';
-
-		echo '
-					<li>', $context['current_time'], '</li>
-				</ul>';
-	}
-	// Otherwise they're a guest - this time ask them to either register or login - lazy bums...
-	elseif (!empty($context['show_login_bar']))
-	{
-		echo '
-				<script type="text/javascript" src="', $settings['default_theme_url'], '/scripts/sha1.js"></script>
-				<form id="guest_form" action="', $scripturl, '?action=login2" method="post" accept-charset="', $context['character_set'], '" ', empty($context['disable_login_hashing']) ? ' onsubmit="hashLoginPassword(this, \'' . $context['session_id'] . '\');"' : '', '>
-					<div class="info">', sprintf($txt['welcome_guest'], $txt['guest_title']), '</div>
-					<input type="text" name="user" size="10" class="input_text" />
-					<input type="password" name="passwrd" size="10" class="input_password" />
-					<select name="cookielength">
-						<option value="60">', $txt['one_hour'], '</option>
-						<option value="1440">', $txt['one_day'], '</option>
-						<option value="10080">', $txt['one_week'], '</option>
-						<option value="43200">', $txt['one_month'], '</option>
-						<option value="-1" selected="selected">', $txt['forever'], '</option>
-					</select>
-					<input type="submit" value="', $txt['login'], '" class="button_submit" /><br />
-					<div class="info">', $txt['quick_login_dec'], '</div>';
-
-		if (!empty($modSettings['enableOpenID']))
-			echo '
-					<br /><input type="text" name="openid_identifier" id="openid_url" size="25" class="input_text openid_login" />';
-
-		echo '
-					<input type="hidden" name="hash_passwrd" value="" />
-				</form>';
-	}
-
-	echo '
-			</div>
-			<div class="news normaltext">
-				<form id="search_form" action="', $scripturl, '?action=search2" method="post" accept-charset="', $context['character_set'], '">
+			<div id="user_search_section">';
+			
+			//User info area! This stuff is all custom.
+			echo '<div id="user_head">
+				<span class="user_head_content">';
+			
+			if ($context['user']['is_logged']) {
+				//Do you have an avatar image?
+				if (!empty($context['user']['avatar']))
+				{
+					$context['user']['avatar']['image'] = strtr($context['user']['avatar']['image'], array("class=\"avatar\"" => "class=\"avatar_t\""));
+				echo '<img src="',$context['user']['avatar']['href'],'" alt="avatar" style="float:left; padding-right:6px;margin-left: 7px;max-height:37px;"/>';
+				} else echo '<a href="' . $scripturl . '?action=profile;u=', $context['user']['id'], ';sa=forumProfile"><img src="' . $settings['images_url'] . '/rmrk7/noavatar.png" alt="missing avatar" width="26" height="37" style="float:left; padding-right:2px;"/></a>';
+				
+				//In case you forgot, this is your name. It's also an easy link to your profile.
+				echo '<a href="' . $scripturl . '?action=profile;u=', $context['user']['id'], ';sa=forumProfile">',$context['user']['name'],'</a> | ';
+				
+				//Do you have any new messages?
+				if ($context['user']['unread_messages'] > 0) {
+					echo '<a href="',$scripturl,'?action=pm"><img src="' . $settings['images_url'] . '/rmrk7/pm_new.png" alt="new messages" /></a>';
+				} else echo '<a href="',$scripturl,'?action=pm"><img src="' . $settings['images_url'] . '/rmrk7/pm_none.png" alt="new messages" /></a>';
+				
+				//Give them the classic, server stressing unread links.
+				echo ' | <a href="' . $scripturl . '?action=unread">Unread Posts</a> | 
+				<a href="' . $scripturl . '?action=unreadreplies">Unread Replies</a>';
+			}
+			
+			echo ' | <form id="topsearch" action="', $scripturl, '?action=search2" method="post" accept-charset="', $context['character_set'], '">
 					<input type="text" name="search" value="" class="input_text" />&nbsp;
 					<input type="submit" name="submit" value="', $txt['search'], '" class="button_submit" />
 					<input type="hidden" name="advanced" value="0" />';
@@ -260,16 +221,21 @@ function template_body_above()
 		echo '
 					<input type="hidden" name="brd[', $context['current_board'], ']" value="', $context['current_board'], '" />';
 
-	echo '</form>';
-
-	// Show a random news item? (or you could pick one from news_lines...)
-	if (!empty($settings['enable_news']))
-		echo '
-				<h2>', $txt['news'], ': </h2>
-				<p>', $context['random_news_line'], '</p>';
+	echo '</form>
+	</span>';
+			
+			echo '</div>';
+			
+			
+			echo '</div>';
+			
+			//End RMRK7 Upper right Search / User section
+			
+	// Show the menu here, according to the menu sub template.
+	template_menu();
 
 	echo '
-			</div>
+			
 		</div>
 		<br class="clear" />';
 

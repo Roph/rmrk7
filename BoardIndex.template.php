@@ -407,7 +407,7 @@ function template_info_center()
 			<div class="title_barIC">
 				<h4 class="titlebg">
 					<span class="ie6_header floatleft">
-						', $context['show_who'] ? '<a href="' . $scripturl . '?action=who' . '">' : '', '<img class="icon" src="', $settings['images_url'], '/icons/online.gif', '" alt="', $txt['online_users'], '" />', $context['show_who'] ? '</a>' : '', '
+						', $context['show_who'] ? '<a href="' . $scripturl . '?action=who' . '">' : '', '<img src="', $settings['images_url'], '/rmrk7/iconic/gray_light/user_24x32.png" style="padding: 0px 4px;" alt="', $txt['online_users'], '" />', $context['show_who'] ? '</a>' : '', '
 						', $txt['online_users'], '
 					</span>
 				</h4>
