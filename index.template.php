@@ -191,8 +191,8 @@ function template_body_above()
 				if (!empty($context['user']['avatar']))
 				{
 					$context['user']['avatar']['image'] = strtr($context['user']['avatar']['image'], array("class=\"avatar\"" => "class=\"avatar_t\""));
-				echo '<img src="',$context['user']['avatar']['href'],'" alt="avatar" style="float:left; padding-right:6px;margin-left: 7px;max-height:37px;"/>';
-				} else echo '<a href="' . $scripturl . '?action=profile;u=', $context['user']['id'], ';sa=forumProfile"><img src="' . $settings['images_url'] . '/rmrk7/noavatar.png" alt="missing avatar" width="26" height="37" style="float:left; padding-right:2px;"/></a>';
+				echo '<img src="',$context['user']['avatar']['href'],'" alt="avatar" style="float:left; margin-left: 7px; margin-right: 6px; max-height:37px;" class="avatar" alt="Avatar"/>';
+				} else echo '<a href="' . $scripturl . '?action=profile;u=', $context['user']['id'], ';sa=forumProfile"><img src="' . $settings['images_url'] . '/rmrk7/noavatar.png" class="avatar" alt="missing avatar" width="26" height="37" style="float:left; padding-right:2px;"/></a>';
 				
 				//In case you forgot, this is your name. It's also an easy link to your profile.
 				echo '<a href="' . $scripturl . '?action=profile;u=', $context['user']['id'], ';sa=forumProfile">',$context['user']['name'],'</a> | ';
@@ -208,8 +208,7 @@ function template_body_above()
 			}
 			
 			echo ' | <form id="topsearch" action="', $scripturl, '?action=search2" method="post" accept-charset="', $context['character_set'], '">
-					<input type="text" name="search" value="" class="input_text" />&nbsp;
-					<input type="submit" name="submit" value="', $txt['search'], '" class="button_submit" />
+					<input type="text" name="search" value="Search..." class="input_text" onblur="if(this.value==\'\') this.value=\'Search...\';" onfocus="if(this.value==\'Search...\') this.value=\'\';" />&nbsp;
 					<input type="hidden" name="advanced" value="0" />';
 
 	// Search within current topic?
@@ -226,13 +225,15 @@ function template_body_above()
 			
 			echo '</div>';
 			
+			// Show the menu here, according to the menu sub template.
+	template_menu();
+			
 			
 			echo '</div>';
 			
 			//End RMRK7 Upper right Search / User section
 			
-	// Show the menu here, according to the menu sub template.
-	template_menu();
+	
 
 	echo '
 			
@@ -303,6 +304,9 @@ function template_body_below()
 			', !empty($modSettings['xmlnews_enable']) && (!empty($modSettings['allow_guestAccess']) || $context['user']['is_logged']) ? '<li><a id="button_rss" href="' . $scripturl . '?action=.xml;type=rss" class="new_win"><span>' . $txt['rss'] . '</span></a></li>' : '', '
 			<li class="last"><a id="button_wap2" href="', $scripturl , '?wap2" class="new_win"><span>', $txt['wap2'], '</span></a></li>
 		</ul>';
+		
+	//Theme Info
+	echo '<p>RMRK7 Theme, Triple Infinity Beta &amp; <a href="https://github.com/Roph/rmrk7" target="_blank">Open Source</a></p>';
 
 	// Show the load time?
 	if ($context['show_load_time'])

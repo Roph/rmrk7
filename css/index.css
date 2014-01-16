@@ -51,7 +51,8 @@ p.online_list a {
 }
 
 div#user_search_section {
-	float: right;
+	float: left;
+	margin-top: 10px;
 }
 
 div#user_head {
@@ -63,6 +64,11 @@ span.user_head_content {
 	display:inline-block; 
 	vertical-align:middle;
 	color: #555;
+}
+
+span.user_head_content img.avatar {
+	border-radius: 3px;
+	box-shadow: 0px 0px 2px #000;
 }
 
 span.user_head_content img {
@@ -111,7 +117,7 @@ body
 	background: #ffffff;
 	font: 85%/130% 'Titillium Web', "Verdana", "Arial", "Helvetica", sans-serif;
 	margin: 0 auto;
-	padding: 15px 0;
+	padding: 0;
 }
 
 /* Help popups require a different styling of the body element. */
@@ -540,7 +546,7 @@ tr.catbg th a:link, tr.catbg th a:visited, tr.catbg2 td a:link, tr.catbg2 td a:v
 .windowbg, #preview_body
 {
 	color: #000;
-	background-color: #e7eaef;
+	background-color: #E6E1EF;
 }
 .windowbg2
 {
@@ -1181,8 +1187,9 @@ span.lowerframe span
 {
 	padding: 0 0.5em;
 	float: left;
-	margin: 0;
 	width: 98%;
+	margin-top: 12px;
+	font-size: 110%;
 }
 
 .dropmenu, .dropmenu ul
@@ -1191,6 +1198,8 @@ span.lowerframe span
 	line-height: 1em;
 	padding: 0;
 	margin: 0;
+	box-shadow: 0px 0px 5px #000;
+	border-radius: 5px;
 }
 .dropmenu
 {
@@ -1237,16 +1246,16 @@ span.lowerframe span
 	position: absolute;
 	width: 19.2em;
 	font-weight: normal;
-	border-bottom: 1px solid #999;
-	background: url(../images/theme/menu_gfx.png) 0 -130px no-repeat;
-	padding: 7px 0 0 0;
+	background: #fff;
+	padding: 3px;
+	border: 3px solid #604B91;
+	top: 20px;
+	left: -5px;
 }
 .dropmenu li li
 {
 	width: 19em;
 	margin: 0;
-	border-left: 1px solid #999;
-	border-right: 1px solid #999;
 }
 .dropmenu li li a span
 {
@@ -1261,32 +1270,40 @@ span.lowerframe span
 /* the active button */
 .dropmenu li a.active
 {
-	background: url(../images/theme/menu_gfx.png) no-repeat 100% 0;
+	background: #413363;
 	color: #fff;
 	font-weight: bold;
+	border-top-right-radius: 2px;
 }
 .dropmenu li a.active span.firstlevel
 {
-	background: url(../images/theme/menu_gfx.png) no-repeat 0 0;
+	background: #413363;
+	border-top-left-radius: 2px;
 }
 /* the hover effects */
 .dropmenu li a.firstlevel:hover, .dropmenu li:hover a.firstlevel
 {
-	background: url(../images/theme/menu_gfx.png) no-repeat 100% -30px;
+	background: #604B91;
 	color: #fff;
 	cursor: pointer;
 	text-decoration: none;
+	border-top-right-radius: 2px;
+	z-index: 300;
+	position: relative;
 }
 .dropmenu li a.firstlevel:hover span.firstlevel, .dropmenu li:hover a.firstlevel span.firstlevel
 {
-	background: url(../images/theme/menu_gfx.png) no-repeat 0 -30px;
+	background: #604B91;
+	border-top-left-radius: 2px;
+	z-index: 200;
 }
 /* the hover effects on level2 and 3 */
 .dropmenu li li a:hover, .dropmenu li li:hover>a
 {
-	background: #d4dbe4;
+	background: #D2CBE3;
 	color: #000;
 	text-decoration: none;
+	border-radius: 5px;
 }
 .dropmenu li:hover ul ul, .dropmenu li:hover ul ul ul
 {
@@ -1415,12 +1432,14 @@ ul#navigation li
 {
 	background: #ffffff;
 	padding-left: 20px;
+	height: 96px;
 }
 #header div.frame
 {
 	background: #ffffff;
 	display: block;
-	padding: 5px 20px 1em 0;
+	padding: 0px 20px 1em 0;
+	height: 96px;
 }
 /* the content section */
 #content_section
@@ -1533,9 +1552,11 @@ div#upper_section div.news form
 #top_section
 {
 	min-height: 65px;
-	overflow: hidden;
+	overflow: visible;
 	margin-bottom: 3px;
 	width:100%;
+	height: 96px;
+	background: url(../images/rmrk7/headerbg.png) repeat-x;
 }
 #upper_section
 {
