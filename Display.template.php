@@ -235,10 +235,12 @@ function template_main()
 		echo '
 				<div class="', $message['approved'] ? ($message['alternate'] == 0 ? 'windowbg' : 'windowbg2') : 'approvebg', '">
 					<span class="topslice"><span></span></span>
-					<div class="post_wrapper">';
+					<div class="post_wrapper">
+						<div class="poster">';
 
 		// Show information about the poster of this message.
-		echo '
+		
+		/*echo '
 						<div class="poster">
 							<h4>';
 
@@ -398,10 +400,98 @@ function template_main()
 		elseif (!empty($message['member']['email']) && in_array($message['member']['show_email'], array('yes', 'yes_permission_override', 'no_through_forum')))
 			echo '
 								<li class="email"><a href="', $scripturl, '?action=emailuser;sa=email;msg=', $message['id'], '" rel="nofollow">', ($settings['use_image_buttons'] ? '<img src="' . $settings['images_url'] . '/email_sm.gif" alt="' . $txt['email'] . '" title="' . $txt['email'] . '" />' : $txt['email']), '</a></li>';
+								
+		*/
+		
+		//RMRK7 Postbit Begin
+		
+		echo '
+			<div class="postbit">
+				<div class="postbit-container">
+					<div class="postbit-header">
+						',$message['member']['link'],'<img src="',$message['member']['online']['image_href'],'" alt="',$message['member']['online']['text'],'" title="',$message['member']['online']['text'],'" />',empty($message['member']['gender']['image']) ? '' : $message['member']['gender']['image'],'
+					</div>
+					<div class="postbit-avatar">
+						<span></span>';
+						if (!empty($settings['show_user_images']) && empty($options['show_no_avatars']) && !empty($message['member']['avatar']['image']))
+							echo $message['member']['avatar']['image'];
+						else echo '<img src="'.$settings['images_url'].'/rmrk7/noavatar.png" alt="" class="avatar"/>';
+						echo'
+					</div>
+					<div class="postbit-main">';
+					
+					if (!$message['member']['is_guest']) {
+						if ((empty($settings['hide_post_group']) || $message['member']['group'] == '') && $message['member']['post_group'] != '') echo '';
+							echo '
+							', $message['member']['group_stars'], '<br />';
+						
+						// Show the member's custom title, if they have one.
+						if (isset($message['member']['title']) && $message['member']['title'] != '')
+							echo '
+							  ', $message['member']['title'], '<br />';
+
+						// Is karma display enabled?  Total or +/-?
+						if ($modSettings['karmaMode'] == '1')
+							echo '
+								', $modSettings['karmaLabel'], ' ', $message['member']['karma']['good'] - $message['member']['karma']['bad'], '';
+						elseif ($modSettings['karmaMode'] == '2')
+							echo '
+								', $modSettings['karmaLabel'], ' +', $message['member']['karma']['good'], '/-', $message['member']['karma']['bad'], '';
+
+						// Is this user allowed to modify this member's karma?
+						if ($message['member']['karma']['allow'])
+							echo '
+								<a href="', $scripturl, '?action=modifykarma;sa=applaud;uid=', $message['member']['id'], ';topic=', $context['current_topic'], '.' . $context['start'], ';m=', $message['id'], ';sesc=', $context['session_id'], '">', $modSettings['karmaApplaudLabel'], '</a>
+								<a href="', $scripturl, '?action=modifykarma;sa=smite;uid=', $message['member']['id'], ';topic=', $context['current_topic'], '.', $context['start'], ';m=', $message['id'], ';sesc=', $context['session_id'], '">', $modSettings['karmaSmiteLabel'], '</a>';
+								echo '<br />
+							';
+								
+						//Before we go any further, calculate the user's level and current percentage.
+						$number = explode('.',round(pow (log10 ($message['member']['real_posts'] + ($context['common_stats']['latest_member']['id'] - $message['member']['id'])), 3),2));
+						$string = $number[0]. (isset($number[1]) ? ' ('. $number[1] . (strlen($number[1]) <2 ? '0' : '') .'%)' : '');
+						//$string: fully formatted level with zero padded percent, i.e. 11 (02%) | $number[0]: Level's Integer Only | $number[1]: Level's Percentage integer
+						
+						echo 'Level '.$number[0].'<br />
+							';
+						
+						//Output a fancy level bar. Later, users might choose their own appearance.
+						echo '<div class="exp"><div style="background:url(',$settings['images_url'],'/rmrk7/level/exp.png) 1px center no-repeat; width: '.$number[1].'%; height: 8px;"></div></div>';
+						
+						//Does the user have any personal text?
+						if (!empty($settings['show_blurb']) && $message['member']['blurb'] != '')
+						echo '
+								', $message['member']['blurb'], '<br />';
+						
+						// Show their awards?
+						if (!empty($message['member']['awards']) && $modSettings['awards_in_post'] > 0){
+							// Couldn't limit it in Load.php, so let's do it here.
+							$awards = 0;
+							
+							echo '<div class="awards">';
+							
+							foreach ($message['member']['awards'] as $award){
+								if($awards < $modSettings['awards_in_post'])
+									echo '<a href="', $scripturl,'?action=profile;area=showAwards;u=',$message['member']['id'],'"><img src="', dirname($scripturl), $award['img'], '" alt="', $award['description'], '" title="', $award['description'], '" class="tiptip" /></a>';
+								$awards++;
+							}
+							
+							echo '</div>';
+						}
+						
+					}
+				
+		//Experimental level bar.
+		
+				
+		echo'		</div>
+				</div>';
+		
+		//RMRK7 Postbit End
+		
 
 		// Done with the information about the poster... on to the post itself.
 		echo '
-							</ul>
+					</div>			
 						</div>
 						<div class="postarea">
 							<div class="flow_hidden">

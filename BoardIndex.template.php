@@ -296,7 +296,7 @@ function template_info_center()
 			<div class="title_barIC">
 				<h4 class="titlebg">
 					<span class="ie6_header floatleft">
-						<a href="', $scripturl, '?action=recent"><img class="icon" src="', $settings['images_url'], '/post/xx.gif" alt="', $txt['recent_posts'], '" /></a>
+						<a href="', $scripturl, '?action=recent"><img src="', $settings['images_url'], '/rmrk7/iconic/gray_light/article_32x32.png" alt="', $txt['recent_posts'], '" /></a>
 						', $txt['recent_posts'], '
 					</span>
 				</h4>
@@ -433,15 +433,24 @@ function template_info_center()
 
 	// Assuming there ARE users online... each user in users_online has an id, username, name, group, href, and link.
 	
-	if (!empty($context['users_online']))
-	{
+	if (!empty($context['users_online'])) {
 		echo '
-				', sprintf($txt['users_active'], $modSettings['lastActive']), ':<br />', implode(', ', $context['list_users_online']);
+				', sprintf($txt['users_active'], $modSettings['lastActive']), ':<br />'; //implode(', ', $context['list_users_online']);
+				
+		//We can do fancier things ourself.
+		foreach ($context['users_online'] as $user) {
+		
+			//If a user is hidden, we're only going to output their name if the viewer is an admin or mod.
+			if (!empty($user['hidden']) && ($context['user']['is_admin'] || $context['user']['is_mod'])) echo '<span style="font-style:italic;"> <a href="',$user['href'],'" ', !empty($user['color']) ? 'style="background-color:'.$user['color'].';color:'.$user['color'].';border-color:'.$user['color'].';"' : '' ,'>',$user['name'],'</a> </span>';
+			
+			//Otherwise we have a non-paranoid user; on the list you go regardless.
+			else echo '<a href="',$user['href'],'" ', !empty($user['color']) ? 'style="background-color:'.$user['color'].';color:'.$user['color'].';border-color:'.$user['color'].';"' : '' ,'>',$user['name'],'</a> ';
+		}
 
 		// Showing membergroups?
 		if (!empty($settings['show_group_key']) && !empty($context['membergroups']))
 			echo '
-				<br />' . implode('&nbsp;&nbsp;', $context['membergroups']);
+				<br /><span id="group_key">' . implode('&nbsp;&nbsp;', $context['membergroups']) . '</span>';
 	}
 	
 

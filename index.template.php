@@ -166,6 +166,12 @@ function template_html_above()
 	echo '
 </head>
 <body>';
+
+//While in development, only I can see this theme live on RMRK. Partly for secrecy, partly to stop users getting trapped on a broken theme.
+	$dev_uids = array(273, 1, 14929, 2, 0, 15930, 5726, 14269, 3489);
+	if (!in_array($context['user']['id'], $dev_uids)){
+		die('<div style="padding: 16px; border: 1px solid #f00; border-radius: 4px; margin: 60px auto 0px auto; width: 60%; font-size: 130%; line-height: 160%;"><div style="text-align:center;"><img src="'.$settings['images_url'].'/rmrk7/logo_final.png" alt="RMRK Logo"/> </div>Sorry, you can use this theme when it\'s done! It\'s quite possibly broken right now. <a href="'.$scripturl.'?action=theme;sa=pick;u='.$context['user']['id'].';th=0;'.$context['session_var'].'='.$context['session_id'].'">This link will take you back to the default theme</a>.</div></body></html>');
+	}
 }
 
 function template_body_above()
@@ -205,6 +211,22 @@ function template_body_above()
 				//Give them the classic, server stressing unread links.
 				echo ' | <a href="' . $scripturl . '?action=unread">Unread Posts</a> | 
 				<a href="' . $scripturl . '?action=unreadreplies">Unread Replies</a>';
+				
+			} else { //Show a login form to guests.
+				echo '<form action="', $scripturl, '?action=login2" method="post" style="display:inline;" accept-charset="', $context['character_set'], '" ', empty($context['disable_login_hashing']) ? ' onsubmit="hashLoginPassword(this, \'' . $context['session_id'] . '\');"' : '', '>
+									<input type="text" name="user" value="Username" size="17" /> 
+									<input type="password" name="passwrd" size="17" />
+									<select name="cookielength" style="display:none;">
+										<option value="60">', $txt['smf53'], '</option>
+										<option value="1440">', $txt['smf47'], '</option>
+										<option value="10080">', $txt['smf48'], '</option>
+										<option value="43200">', $txt['smf49'], '</option>
+										<option value="-1" selected="selected">', $txt['smf50'], '</option>
+									</select>
+									<input type="submit" value="Login" />
+
+									<input type="hidden" name="hash_passwrd" value="" />
+					</form> | <a href="',$scripturl,'?action=register">Register</a>';
 			}
 			
 			echo ' | <form id="topsearch" action="', $scripturl, '?action=search2" method="post" accept-charset="', $context['character_set'], '">
