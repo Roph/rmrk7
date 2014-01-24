@@ -34,6 +34,8 @@ div.messageindex_avatar {
 	border-radius: 4px;
 	background-size: 100% 100%;
 	box-shadow: 0px 0px 5px #000 inset;
+	background-position: center;
+	background-repeat: none;
 }
 
 span.messageindex_topictitle {
@@ -92,7 +94,7 @@ div.postbit {
 	margin: 5px;
 }
 
-div.postbit-header {
+div.postbit-header, div.postbit-header-op {
 	padding: 2px 2px 2px 8px;
 	background: #C6BDDC;
 	position: relative;
@@ -107,10 +109,20 @@ div.postbit-header {
 	left: 0;
 	border-width: 12px 12px 0 0;
 	border-style: solid;
-	border-color: #E6E1EF #C6BDDC;
+	border-color: #fff #C6BDDC;
 }
 
-div.postbit-header img.gender {
+.postbit-header-op:before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-width: 12px 12px 0 0;
+	border-style: solid;
+	border-color: #2089EC #C6BDDC;
+}
+
+div.postbit-header img.gender, div.postbit-header-op img.gender {
 	float:right;
 	padding: 3px 1px 3px 0px;
 }
@@ -140,14 +152,26 @@ div.postbit-avatar img.avatar {
 
 div.postbit-main {
 	text-align: center;
+	font-size: 85%;
 }
 
-div.exp {
-	width: 109px;
+div.karma {
+	width: 105px;
 	height: 8px;
 	padding: 0;
 	margin: 0 auto;
-	background: url(../images/rmrk7/level/bg.png) center center no-repeat;
+}
+
+div.karma div {
+	height: 8px;
+}
+
+div.exp {
+	width: 105px;
+	height: 8px;
+	padding: 0;
+	margin: 0 auto;
+	background: url(../images/rmrk7/barbg.png) center center no-repeat;
 }
 
 div.awards {
@@ -160,17 +184,29 @@ div.awards img {
 	padding: 1px;
 }
 
-div.awards img:hover {
-	background: #6A6585;
-}
-
 div.awards:hover {
 	height: 100%;
 	overflow: visible;
-	background: #403D50;
 }
 
+div.keyinfo a.postlink {
+	color: #999;
+	font-size: 16px;
+	line-height: 35px;
+}
 
+td.icon {
+	font-size: 85%;
+}
+
+div.topictitle {
+	margin: 5px auto 10px auto;
+	font-size: 190%;
+	line-height: 130%;
+	font-weight: bold;
+	width: 100%;
+	text-align: center;
+}
 
 /* Basic SMF Stuff*/
 
@@ -641,12 +677,12 @@ tr.catbg th a:link, tr.catbg th a:visited, tr.catbg2 td a:link, tr.catbg2 td a:v
 .windowbg, #preview_body
 {
 	color: #000;
-	background-color: #E6E1EF;
+	background-color: #fff;
 }
 .windowbg2
 {
 	color: #000;
-	background-color: #E6E1EF;
+	background-color: #fff;
 }
 .windowbg3
 {
@@ -1116,13 +1152,13 @@ table.table_grid thead tr.catbg th
 {
 	display: block;
 	padding-left: 20px;
-	background: #ffffff;
+	background: #fff
 }
 .windowbg span.topslice span
 {
 	display: block;
 	background: #ffffff;
-	height: 11px;
+	height: 0px;
 }
 .windowbg span.botslice
 {
@@ -1132,12 +1168,13 @@ table.table_grid thead tr.catbg th
 	font-size: 5px;
 	line-height: 5px;
 	margin-bottom: 0.2em;
+	height: 10px;
 }
 .windowbg span.botslice span
 {
 	display: block;
 	background: #ffffff;
-	height: 11px;
+	height: 0px;
 }
 
 .windowbg2 span.topslice
@@ -1150,7 +1187,7 @@ table.table_grid thead tr.catbg th
 {
 	display: block;
 	background: #ffffff;
-	height: 11px;
+	height: 0px;
 }
 .windowbg2 span.botslice
 {
@@ -1160,12 +1197,13 @@ table.table_grid thead tr.catbg th
 	font-size: 5px;
 	line-height: 5px;
 	margin-bottom: 0.2em;
+	height: 10px;
 }
 .windowbg2 span.botslice span
 {
 	display: block;
 	background: #ffffff;
-	height: 11px;
+	height: 0px;
 }
 .approvebg span.topslice
 {
@@ -1194,18 +1232,16 @@ table.table_grid thead tr.catbg th
 }
 .postbg
 {
-	border-left: 1px solid #7f7f7f;
-	border-right: 1px solid #7f7f7f;
+	border-left: 1px solid #f00;
+	border-right: 1px solid #f00;
 }
 
 /* Used for sections that need somewhat larger corners.
 ----------------------------------------------------------- */
 .roundframe
 {
-	padding: 0 10px;
+	padding: 0;
 	background: #f5f5f5;
-	border-left: 1px solid #c5c5c5;
-	border-right: 1px solid #c5c5c5;
 }
 .roundframe dl, .roundframe dt, .roundframe p
 {
@@ -2201,6 +2237,7 @@ p#whoisviewing
 {
 	float: left;
 	width: 50%;
+	height: 30px;
 }
 .modifybutton
 {
@@ -2244,7 +2281,7 @@ ul.quickbuttons li a
 }
 ul.quickbuttons a:hover
 {
-	color: #a70;
+	color: #000;
 }
 ul.quickbuttons li.quote_button
 {
@@ -2365,7 +2402,11 @@ img.smiley
 /* Separator of posts. More useful in the print stylesheet. */
 #forumposts .post_separator
 {
-	display: none;
+	display: block;
+	height: 1px;
+	background: url(../images/rmrk7/multibar.png);
+	padding: 0;
+	margin-bottom: 15px;
 }
 
 /* Styles for edit post section

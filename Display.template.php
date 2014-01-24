@@ -13,6 +13,18 @@
 function template_main()
 {
 	global $context, $settings, $options, $txt, $scripturl, $modSettings;
+	
+	function formatDate($time) {
+			if ($time >= strtotime("today 00:00")) {
+				return date("g:i A", $time);
+			} elseif ($time >= strtotime("yesterday 00:00")) {
+				return "Yesterday at " . date("g:i A", $time);
+			} elseif ($time >= strtotime("-6 day 00:00")) {
+				return date("l \\a\\t g:i A", $time);
+			} else {
+				return date("M j, Y", $time);
+			}
+	}
 
 	// Let them know, if their report was a success!
 	if ($context['report_sent'])
@@ -22,6 +34,8 @@ function template_main()
 				', $txt['report_sent'], '
 			</div>';
 	}
+	
+	echo '<div class="topictitle">', $context['subject'], '</div>';
 
 	// Show the anchor for the top and for the first message. If the first message is new, say so.
 	echo '
@@ -180,7 +194,7 @@ function template_main()
 	// Show the topic information - icon, subject, etc.
 	echo '
 			<div id="forumposts">
-				<div class="cat_bar">
+				<div class="cat_bar" style="display:none;">
 					<h3 class="catbg">
 						<img src="', $settings['images_url'], '/topic/', $context['class'], '.gif" align="bottom" alt="" />
 						<span id="author">', $txt['author'], '</span>
@@ -408,7 +422,7 @@ function template_main()
 		echo '
 			<div class="postbit">
 				<div class="postbit-container">
-					<div class="postbit-header">
+					<div class="postbit-header',$message['member']['is_topic_starter'] ? '-op' : '','">
 						',$message['member']['link'],'<img src="',$message['member']['online']['image_href'],'" alt="',$message['member']['online']['text'],'" title="',$message['member']['online']['text'],'" />',empty($message['member']['gender']['image']) ? '' : $message['member']['gender']['image'],'
 					</div>
 					<div class="postbit-avatar">
@@ -434,17 +448,35 @@ function template_main()
 						if ($modSettings['karmaMode'] == '1')
 							echo '
 								', $modSettings['karmaLabel'], ' ', $message['member']['karma']['good'] - $message['member']['karma']['bad'], '';
-						elseif ($modSettings['karmaMode'] == '2')
-							echo '
-								', $modSettings['karmaLabel'], ' +', $message['member']['karma']['good'], '/-', $message['member']['karma']['bad'], '';
+						elseif ($modSettings['karmaMode'] == '2')  {
+							//No karma? no karma bar.
+							if (empty($message['member']['karma']['good']) && empty($message['member']['karma']['bad'])) {
+								echo '
+								',$modSettings['karmaLabel'], ' +', $message['member']['karma']['good'], '/-', $message['member']['karma']['bad'];
+							} else {
+								$karma_sum = ($message['member']['karma']['good'] + $message['member']['karma']['bad']);
+								$karma_positive = ($message['member']['karma']['good'] / $karma_sum * 100);
+								$karma_negative = ($message['member']['karma']['bad'] / $karma_sum * 100);
+								
+								echo '
+								',$modSettings['karmaLabel']; 
+								if ($message['member']['karma']['allow']) echo '
+									<a href="', $scripturl, '?action=modifykarma;sa=applaud;uid=', $message['member']['id'], ';topic=', $context['current_topic'], '.' . $context['start'], ';m=', $message['id'], ';sesc=', $context['session_id'], '">', $modSettings['karmaApplaudLabel'], '</a>
+									<a href="', $scripturl, '?action=modifykarma;sa=smite;uid=', $message['member']['id'], ';topic=', $context['current_topic'], '.', $context['start'], ';m=', $message['id'], ';sesc=', $context['session_id'], '">', $modSettings['karmaSmiteLabel'], '</a><br />';
+									$inline_vote = true;
+								echo '<div class="karma">
+									<div style="background:url(',$settings['images_url'],'/rmrk7/barrepgood.png) top left; width:',$karma_positive,'%; float:left;"></div><div style="background:url(',$settings['images_url'],'/rmrk7/barrepbad.png) top right; width:',$karma_negative,'%; float:left;"></div>
+								</div>';
+							}	
+						}
 
 						// Is this user allowed to modify this member's karma?
-						if ($message['member']['karma']['allow'])
-							echo '
+						if ($message['member']['karma']['allow'] && !$inline_vote) echo '
 								<a href="', $scripturl, '?action=modifykarma;sa=applaud;uid=', $message['member']['id'], ';topic=', $context['current_topic'], '.' . $context['start'], ';m=', $message['id'], ';sesc=', $context['session_id'], '">', $modSettings['karmaApplaudLabel'], '</a>
-								<a href="', $scripturl, '?action=modifykarma;sa=smite;uid=', $message['member']['id'], ';topic=', $context['current_topic'], '.', $context['start'], ';m=', $message['id'], ';sesc=', $context['session_id'], '">', $modSettings['karmaSmiteLabel'], '</a>';
-								echo '<br />
-							';
+								<a href="', $scripturl, '?action=modifykarma;sa=smite;uid=', $message['member']['id'], ';topic=', $context['current_topic'], '.', $context['start'], ';m=', $message['id'], ';sesc=', $context['session_id'], '">', $modSettings['karmaSmiteLabel'], '</a><br />';
+								
+						//Since we're in a loop, reset inline voting.
+						$inline_vote = false;
 								
 						//Before we go any further, calculate the user's level and current percentage.
 						$number = explode('.',round(pow (log10 ($message['member']['real_posts'] + ($context['common_stats']['latest_member']['id'] - $message['member']['id'])), 3),2));
@@ -455,7 +487,8 @@ function template_main()
 							';
 						
 						//Output a fancy level bar. Later, users might choose their own appearance.
-						echo '<div class="exp"><div style="background:url(',$settings['images_url'],'/rmrk7/level/exp.png) 1px center no-repeat; width: '.$number[1].'%; height: 8px;"></div></div>';
+						echo '<div class="exp"><div style="background:url(',$settings['images_url'],'/rmrk7/barexp.png) left center no-repeat; width: '.$number[1].'%; height: 8px;"></div></div>';
+						
 						
 						//Does the user have any personal text?
 						if (!empty($settings['show_blurb']) && $message['member']['blurb'] != '')
@@ -499,11 +532,7 @@ function template_main()
 									<div class="messageicon">
 										<img src="', $message['icon_url'] . '" alt=""', $message['can_modify'] ? ' id="msg_icon_' . $message['id'] . '"' : '', ' />
 									</div>
-									<h5 id="subject_', $message['id'], '">
-										<a href="', $message['href'], '" rel="nofollow">', $message['subject'], '</a>
-									</h5>
-									<div class="smalltext">&#171; <strong>', !empty($message['counter']) ? $txt['reply_noun'] . ' #' . $message['counter'] : '', ' ', $txt['on'], ':</strong> ', $message['time'], ' &#187;</div>
-									<div id="msg_', $message['id'], '_quick_mod"></div>
+										<a id="subject_', $message['id'], '" class="postlink" href="', $message['href'], '" rel="nofollow" title="', $message['subject'], '">', !empty($message['counter']) ? '#' . ($message['counter'] + 1) : '#1', ' &bull; ', formatDate($message['timestamp']), '</a>
 								</div>';
 
 		// If this is the first post, (#0) just say when it was posted - otherwise give the reply #.
@@ -545,7 +574,34 @@ function template_main()
 		if ($context['can_restore_msg'])
 			echo '
 									<li class="restore_button"><a href="', $scripturl, '?action=restoretopic;msgs=', $message['id'], ';', $context['session_var'], '=', $context['session_id'], '">', $txt['restore_message'], '</a></li>';
-
+									
+		//IP / Report info looks much better up on this bar instead of floating around the bottom. We also stop IPs leaking out through screenshots. 
+		// Maybe they want to report this post to the moderator(s)?
+		if ($context['can_report_moderator'])
+			echo '
+						<li><a style="padding: 0;" href="', $scripturl, '?action=reporttm;topic=', $context['current_topic'], '.', $message['counter'], ';msg=', $message['id'], '"><img src="', $settings['images_url'], '/warn.gif" alt="', $txt['report_to_mod'], '" title="', $txt['report_to_mod'], '" border="0" /></a></li>';
+	
+		echo '<li>';
+		
+		// Show the IP to this user for this post - because you can moderate?
+		if ($context['can_moderate_forum'] && !empty($message['member']['ip']))
+			echo '
+						<a style="padding: 0;" href="', $scripturl, '?action=', !empty($message['member']['is_guest']) ? 'trackip' : 'profile;area=tracking;sa=ip;u=' . $message['member']['id'], ';searchip=', $message['member']['ip'], '"><img src="', $settings['images_url'], '/connect.png" alt="" border="0" /></a>';
+		// Or, should we show it because this is you?
+		elseif ($message['can_see_ip'])
+			echo '
+						<a style="padding: 0;" href="', $scripturl, '?action=helpadmin;help=see_member_ip" onclick="return reqWin(this.href);" class="help"><img src="', $settings['images_url'], '/connect.png" alt="" border="0" /></a>';
+		// Okay, are you at least logged in?  Then we can show something about why IPs are logged...
+		elseif (!$context['user']['is_guest'])
+			echo '
+						<a style="padding: 0;" href="', $scripturl, '?action=helpadmin;help=see_member_ip" onclick="return reqWin(this.href);" class="help"><img src="', $settings['images_url'], '/connect.png" alt="" border="0" /></a>';
+		// Otherwise, you see NOTHING!
+		else
+			echo '
+						<img src="', $settings['images_url'], '/connect.png" alt="" border="0" />';
+		echo '</li>';
+		
+		//We now return to scheduled programming.
 		// Show a checkbox for quick moderation?
 		if (!empty($options['display_quick_mod']) && $options['display_quick_mod'] == 1 && $message['can_remove'])
 			echo '
@@ -646,39 +702,6 @@ function template_main()
 		if ($settings['show_modify'] && !empty($message['modified']['name']))
 			echo '
 								&#171; <em>', $txt['last_edit'], ': ', $message['modified']['time'], ' ', $txt['by'], ' ', $message['modified']['name'], '</em> &#187;';
-
-		echo '
-							</div>
-							<div class="smalltext reportlinks">';
-
-		// Maybe they want to report this post to the moderator(s)?
-		if ($context['can_report_moderator'])
-			echo '
-								<a href="', $scripturl, '?action=reporttm;topic=', $context['current_topic'], '.', $message['counter'], ';msg=', $message['id'], '">', $txt['report_to_mod'], '</a> &nbsp;';
-
-		// Can we issue a warning because of this post?  Remember, we can't give guests warnings.
-		if ($context['can_issue_warning'] && !$message['is_message_author'] && !$message['member']['is_guest'])
-			echo '
-								<a href="', $scripturl, '?action=profile;area=issuewarning;u=', $message['member']['id'], ';msg=', $message['id'], '"><img src="', $settings['images_url'], '/warn.gif" alt="', $txt['issue_warning_post'], '" title="', $txt['issue_warning_post'], '" /></a>';
-		echo '
-								<img src="', $settings['images_url'], '/ip.gif" alt="" />';
-
-		// Show the IP to this user for this post - because you can moderate?
-		if ($context['can_moderate_forum'] && !empty($message['member']['ip']))
-			echo '
-								<a href="', $scripturl, '?action=', !empty($message['member']['is_guest']) ? 'trackip' : 'profile;area=tracking;sa=ip;u=' . $message['member']['id'], ';searchip=', $message['member']['ip'], '">', $message['member']['ip'], '</a> <a href="', $scripturl, '?action=helpadmin;help=see_admin_ip" onclick="return reqWin(this.href);" class="help">(?)</a>';
-		// Or, should we show it because this is you?
-		elseif ($message['can_see_ip'])
-			echo '
-								<a href="', $scripturl, '?action=helpadmin;help=see_member_ip" onclick="return reqWin(this.href);" class="help">', $message['member']['ip'], '</a>';
-		// Okay, are you at least logged in?  Then we can show something about why IPs are logged...
-		elseif (!$context['user']['is_guest'])
-			echo '
-								<a href="', $scripturl, '?action=helpadmin;help=see_member_ip" onclick="return reqWin(this.href);" class="help">', $txt['logged'], '</a>';
-		// Otherwise, you see NOTHING!
-		else
-			echo '
-								', $txt['logged'];
 
 		echo '
 							</div>';

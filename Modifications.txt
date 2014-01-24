@@ -66,12 +66,31 @@ Allowing a border around online list usernames, define a border colour in Source
 
 Find:
 
-// Some basic color coding...
-		if (!empty($row['online_color']))
-			$link = '<a href="' . $scripturl . '?action=profile;u=' . $row['id_member'] . '" style="color: ' . $row['online_color'] . ';">' . $row['real_name'] . '</a>';
+		// A lot of useful information for each member.
+		$membersOnlineStats['users_online'][$row[$membersOnlineOptions['sort']] . $row['member_name']] = array(
+			'id' => $row['id_member'],
+			'username' => $row['member_name'],
+			'name' => $row['real_name'],
+			'group' => $row['id_group'],
+			'href' => $scripturl . '?action=profile;u=' . $row['id_member'],
+			'link' => $link,
+			'is_buddy' => $is_buddy,
+			'hidden' => empty($row['show_online']),
+			'is_last' => false,
+		);
 			
 Replace with:
 
-// Some basic color coding...
-		if (!empty($row['online_color']))
-			$link = '<a href="' . $scripturl . '?action=profile;u=' . $row['id_member'] . '" style="color: ' . $row['online_color'] . '; border-color: ' . $row['online_color'] . '">' . $row['real_name'] . '</a>';
+		// A lot of useful information for each member.
+		$membersOnlineStats['users_online'][$row[$membersOnlineOptions['sort']] . $row['member_name']] = array(
+			'id' => $row['id_member'],
+			'username' => $row['member_name'],
+			'name' => $row['real_name'],
+			'group' => $row['id_group'],
+			'href' => $scripturl . '?action=profile;u=' . $row['id_member'],
+			'link' => $link,
+			'color' => $row['online_color'],
+			'is_buddy' => $is_buddy,
+			'hidden' => empty($row['show_online']),
+			'is_last' => false,
+		);
