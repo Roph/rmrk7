@@ -195,8 +195,9 @@ div.keyinfo a.postlink {
 	line-height: 35px;
 }
 
-td.icon {
+span.boardtotals {
 	font-size: 85%;
+	color: #666;
 }
 
 div.topictitle {
@@ -206,6 +207,26 @@ div.topictitle {
 	font-weight: bold;
 	width: 100%;
 	text-align: center;
+}
+
+div.post_wrapper ul.quickbuttons {
+	opacity:0.5;
+	transition:opacity 100ms ease-in;
+}
+
+div.post_wrapper:hover ul.quickbuttons {
+	opacity:1.0;
+	transition:opacity 100ms ease-in;
+}
+
+table tr.boardindex td {
+	padding-bottom: 10px;
+	padding-top: 10px;
+	border-bottom: 1px dotted #bbb;
+}
+
+table td.children {
+	border-bottom: 1px dotted #bbb;
 }
 
 /* Basic SMF Stuff*/

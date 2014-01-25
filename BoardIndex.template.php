@@ -134,7 +134,7 @@ function template_main()
 			foreach ($category['boards'] as $board)
 			{
 				echo '
-				<tr id="board_', $board['id'], '" class="windowbg2">
+				<tr id="board_', $board['id'], '" class="windowbg2 boardindex">
 					<td class="icon windowbg"', !empty($board['children']) ? ' rowspan="2"' : '', '>
 						<a href="', ($board['is_redirect'] || $context['user']['is_guest'] ? $board['href'] : $scripturl . '?action=unread;board=' . $board['id'] . '.0;children'), '">';
 
@@ -152,13 +152,12 @@ function template_main()
 							<img src="', $settings['images_url'], '/', $context['theme_variant_url'], 'off.png" alt="', $txt['old_posts'], '" title="', $txt['old_posts'], '" />';
 
 				echo '
-						</a><br />
-						<p class="smalltext"><img src="'.$settings['images_url'].'/rmrk7/iconic/gray_light/article_8x8.png" alt="'.$txt['posts'].'"/>', comma_format($board['posts']), ' ', $board['is_redirect'] ? $txt['redirects'] : '', ' 
-						', $board['is_redirect'] ? '' : '<img src="'.$settings['images_url'].'/rmrk7/iconic/gray_light/book_alt2_8x7.png" alt="'.$txt['topics'].'"/>'.comma_format($board['topics']),'
-						</p>
+						</a>
+						
 					</td>
 					<td class="info">
-						<a class="subject" href="', $board['href'], '" name="b', $board['id'], '">', $board['name'], '</a>';
+						<a class="subject" href="', $board['href'], '" name="b', $board['id'], '">', $board['name'], '</a> <span class="boardtotals"><img src="'.$settings['images_url'].'/rmrk7/iconic/gray_light/article_8x8.png" alt="'.$txt['posts'].'"/> ', comma_format($board['posts']), ' ', $board['is_redirect'] ? $txt['redirects'] : '', ' 
+						', $board['is_redirect'] ? '' : '<img src="'.$settings['images_url'].'/rmrk7/iconic/gray_light/book_alt2_8x7.png" alt="'.$txt['topics'].'"/> '.comma_format($board['topics']),'</span>';
 
 				// Has it outstanding posts for approval?
 				if ($board['can_approve_posts'] && ($board['unapproved_posts'] || $board['unapproved_topics']))
@@ -178,7 +177,6 @@ function template_main()
 					echo '
 					</td>
 					<td class="stats windowbg">
-						delete this
 					</td>
 					<td class="lastpost">';
 
@@ -188,9 +186,9 @@ function template_main()
 				and member. (which has id, name, link, href, username in it.) */
 				if (!empty($board['last_post']['id']))
 					echo '
-						<p><strong>', $txt['last_post'], '</strong>  ', $txt['by'], ' ', $board['last_post']['member']['link'] , '<br />
-						', $txt['in'], ' ', $board['last_post']['link'], '<br />
-						', $txt['on'], ' ', $board['last_post']['time'],'
+						<p style="line-height: 23px;"><img src="',$settings['images_url'],'/rmrk7/iconic/gray_light/arrow_down_alt1_12x12.png" alt="', $txt['last_post'], '" title="', $txt['last_post'], '" style="float:left;" /> ', $board['last_post']['member']['link'] , '<br />
+						<img src="',$settings['images_url'],'/rmrk7/iconic/gray_light/chat_12x12.png" alt=""style="float:left;" /> ', $board['last_post']['link'], '<br />
+						<img src="',$settings['images_url'],'/rmrk7/iconic/gray_light/calendar_alt_fill_12x12.png" alt=""style="float:left;" /> ', $board['last_post']['time'],'
 						</p>';
 				echo '
 					</td>
