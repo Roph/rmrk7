@@ -329,6 +329,8 @@ function template_body_below()
 		
 	//Theme Info
 	echo '<p>RMRK7 Theme, Triple Infinity Beta &amp; <a href="https://github.com/Roph/rmrk7" target="_blank">Open Source</a></p>';
+	
+	echo '<p><img src="',$settings['images_url'],'/rmrk7/negativeman.png" alt=";_;" /></p>';
 
 	// Show the load time?
 	if ($context['show_load_time'])

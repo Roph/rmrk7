@@ -229,6 +229,17 @@ table td.children {
 	border-bottom: 1px dotted #bbb;
 }
 
+span.topicstats {
+	font-size: 90%;
+}
+
+span.board_description {
+	font-size: 50%;
+	clear: both;
+	color: #666;
+	font-weight: normal;
+}
+
 /* Basic SMF Stuff*/
 
 /* Normal, standard links. */

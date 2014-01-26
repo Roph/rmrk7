@@ -123,10 +123,10 @@ function template_main()
 		</div>
 	</div>';
 	}
-
-	if (!empty($options['show_board_desc']) && $context['description'] != '')
-		echo '
-	<p class="description_board">', $context['description'], '</p>';
+	
+	echo '
+	<div class="topictitle">',$context['name'],'
+	',(!empty($options['show_board_desc']) && $context['description'] != '') ? '<span class="board_description"><br />'.$context['description'].'</span>' : '','</div>';
 
 	// Create the button set...
 	$normal_buttons = array(
@@ -249,11 +249,15 @@ function template_main()
 				<tr>
 					<td colspan="2" class="icon1 ', $color_class, '">
 						<!-- <img src="', $settings['images_url'], '/topic/', $topic['class'], '.gif" alt="" /> -->
-						'.(empty($topic['first_post']['member']['avatar']['image']) ? '<div class="messageindex_avatar" style="background:url('.$settings['images_url'].'/rmrk7/noavatar.png); background-size: contain;"></div>' : '<div class="messageindex_avatar" style="background:url('.$topic['first_post']['member']['avatar']['href'].'); background-size: contain;"></div>' ).'
+						'.(empty($topic['first_post']['member']['avatar']['image']) ? '<div class="messageindex_avatar" style="background:url('.$settings['images_url'].'/rmrk7/noavatar.png) center center no-repeat; background-size: contain;"></div>' : '<div class="messageindex_avatar" style="background:url('.$topic['first_post']['member']['avatar']['href'].') center center no-repeat; background-size: contain;"></div>' ).'
 					</td>
 					<td class="subject ', $alternate_class, '">
 						<div ', (!empty($topic['quick_mod']['modify']) ? 'id="topic_' . $topic['first_post']['id'] . '" onmouseout="mouse_on_div = 0;" onmouseover="mouse_on_div = 1;" ondblclick="modify_topic(\'' . $topic['id'] . '\', \'' . $topic['first_post']['id'] . '\');"' : ''), '>
 							', $topic['is_sticky'] ? '<strong>' : '', '<span class="messageindex_topictitle" id="msg_' . $topic['first_post']['id'] . '">', $topic['first_post']['link'], (!$context['can_approve_posts'] && !$topic['approved'] ? '&nbsp;<em>(' . $txt['awaiting_approval'] . ')</em>' : ''), '</span>', $topic['is_sticky'] ? '</strong>' : '';
+							
+			//Show our views / replies count next to the topic title.
+			echo ' <span class="topicstats"> <img src="',$settings['images_url'],'/rmrk7/iconic/gray_light/eye_12x9.png" alt="', $topic['views'], '" /> ', $topic['views'], ' 
+			<img src="',$settings['images_url'],'/rmrk7/iconic/gray_light/chat_alt_stroke_12x12.png" alt="', $topic['replies'], '" /> ', $topic['replies'], '</span>';
 
 			// Is this topic new? (assuming they are logged in!)
 			if ($topic['new'] && $context['user']['is_logged'])
@@ -267,9 +271,6 @@ function template_main()
 						</div>
 					</td>
 					<td class="stats ', $color_class, '">
-						', $topic['replies'], ' ', $txt['replies'], '
-						<br />
-						', $topic['views'], ' ', $txt['views'], '
 					</td>
 					<td class="lastpost ', $alternate_class, '">
 						<a href="', $topic['last_post']['href'], '"><img src="', $settings['images_url'], '/icons/last_post.gif" alt="', $txt['last_post'], '" title="', $txt['last_post'], '" /></a>
