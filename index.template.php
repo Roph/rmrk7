@@ -168,7 +168,7 @@ function template_html_above()
 <body>';
 
 //While in development, only I can see this theme live on RMRK. Partly for secrecy, partly to stop users getting trapped on a broken theme.
-	$dev_uids = array(273, 1, 14929, 2, 0, 15930, 5726, 14269, 3489);
+	$dev_uids = array(273, 1, 14929, 2, 0, 15930, 5726, 14269, 3489, 2572, 880);
 	if (!in_array($context['user']['id'], $dev_uids)){
 		die('<div style="padding: 16px; border: 1px solid #f00; border-radius: 4px; margin: 60px auto 0px auto; width: 60%; font-size: 130%; line-height: 160%;"><div style="text-align:center;"><img src="'.$settings['images_url'].'/rmrk7/logo_final.png" alt="RMRK Logo"/> </div>Sorry, you can use this theme when it\'s done! It\'s quite possibly broken right now. <a href="'.$scripturl.'?action=theme;sa=pick;u='.$context['user']['id'].';th=0;'.$context['session_var'].'='.$context['session_id'].'">This link will take you back to the default theme</a>.</div></body></html>');
 	}

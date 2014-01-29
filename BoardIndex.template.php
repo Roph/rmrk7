@@ -186,7 +186,7 @@ function template_main()
 				and member. (which has id, name, link, href, username in it.) */
 				if (!empty($board['last_post']['id']))
 					echo '
-						<p style="line-height: 23px;"><img src="',$settings['images_url'],'/rmrk7/iconic/gray_light/arrow_down_alt1_12x12.png" alt="', $txt['last_post'], '" title="', $txt['last_post'], '" style="float:left;" /> ', $board['last_post']['member']['link'] , '<br />
+						<p style="line-height: 19px;"><img src="',$settings['images_url'],'/rmrk7/iconic/gray_light/arrow_down_alt1_12x12.png" alt="', $txt['last_post'], '" title="', $txt['last_post'], '" style="float:left;" /> ', $board['last_post']['member']['link'] , '<br />
 						<img src="',$settings['images_url'],'/rmrk7/iconic/gray_light/chat_12x12.png" alt=""style="float:left;" /> ', $board['last_post']['link'], '<br />
 						<img src="',$settings['images_url'],'/rmrk7/iconic/gray_light/calendar_alt_fill_12x12.png" alt=""style="float:left;" /> ', $board['last_post']['time'],'
 						</p>';
