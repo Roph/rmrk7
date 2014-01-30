@@ -173,17 +173,16 @@ function template_main()
 
 							<a href="', $scripturl, '?board=', $context['current_board'], '.', $context['start'], ';sort=views', $context['sort_by'] == 'views' && $context['sort_direction'] == 'up' ? ';desc' : '', '">', $txt['views'], $context['sort_by'] == 'views' ? ' <img src="' . $settings['images_url'] . '/sort_' . $context['sort_direction'] . '.gif" alt="" />' : '', '</a> &bull; <a href="', $scripturl, '?board=', $context['current_board'], '.', $context['start'], ';sort=replies', $context['sort_by'] == 'replies' && $context['sort_direction'] == 'up' ? ';desc' : '', '">', $txt['replies'], $context['sort_by'] == 'replies' ? ' <img src="' . $settings['images_url'] . '/sort_' . $context['sort_direction'] . '.gif" alt="" />' : '', '</a>
 						</span>
-					</th>
-					<th scope="col" width="14%"></th>';
+					</th>';
 			// Show a "select all" box for quick moderation?
 			if (empty($context['can_quick_mod']))
 				echo '
-					<th scope="col" class="lefttext last_th" width="22%"><span class="messageindex_columnheaders">
+					<th scope="col" class="lefttext last_th" width="18%"><span class="messageindex_columnheaders">
 						<a href="', $scripturl, '?board=', $context['current_board'], '.', $context['start'], ';sort=last_post', $context['sort_by'] == 'last_post' && $context['sort_direction'] == 'up' ? ';desc' : '', '">', $txt['last_post'], $context['sort_by'] == 'last_post' ? ' <img src="' . $settings['images_url'] . '/sort_' . $context['sort_direction'] . '.gif" alt="" />' : '', '</a>
 					</span></th>';
 			else
 				echo '
-					<th scope="col" class="lefttext" width="22%"><span class="messageindex_columnheaders">
+					<th scope="col" class="lefttext" width="18%"><span class="messageindex_columnheaders">
 						<a href="', $scripturl, '?board=', $context['current_board'], '.', $context['start'], ';sort=last_post', $context['sort_by'] == 'last_post' && $context['sort_direction'] == 'up' ? ';desc' : '', '">', $txt['last_post'], $context['sort_by'] == 'last_post' ? ' <img src="' . $settings['images_url'] . '/sort_' . $context['sort_direction'] . '.gif" alt="" />' : '', '</a>
 					</span></th>';
 
@@ -213,7 +212,7 @@ function template_main()
 		{
 			echo '
 				<tr class="windowbg2 whos_viewing">
-					<td colspan="', !empty($context['can_quick_mod']) ? '6' : '5', '" class="smalltext">';
+					<td colspan="', !empty($context['can_quick_mod']) ? '5' : '4', '" class="smalltext">';
 			if ($settings['display_who_viewing'] == 1)
 				echo count($context['view_members']), ' ', count($context['view_members']) === 1 ? $txt['who_member'] : $txt['members'];
 			else
@@ -228,7 +227,7 @@ function template_main()
 		{
 			echo '
 				<tr class="windowbg2">
-					<td colspan="', !empty($context['can_quick_mod']) ? '6' : '5', '">
+					<td colspan="', !empty($context['can_quick_mod']) ? '5' : '4', '">
 						<span class="alert">!</span> ', $context['unapproved_posts_message'], '
 					</td>
 				</tr>';
@@ -280,12 +279,9 @@ function template_main()
 							</p>
 						</div>
 					</td>
-					<td class="stats ', $color_class, '">
-					</td>
 					<td class="lastpost ', $alternate_class, '">
 						<p style="line-height: 19px;">
-							<img src="',$settings['images_url'],'/rmrk7/iconic/gray_light/arrow_down_alt1_12x12.png" alt="', $txt['last_post'], '" title="', $txt['last_post'], '" style="float:left;" /> ', $topic['last_post']['member']['link'] , '<br />
-							<img src="',$settings['images_url'],'/rmrk7/iconic/gray_light/chat_12x12.png" alt=""style="float:left;" /> ', $topic['last_post']['link'], '<br />
+							<a href="', $topic['last_post']['href'], '"><img src="',$settings['images_url'],'/rmrk7/iconic/gray_light/arrow_down_alt1_12x12.png" alt="', $txt['last_post'], '" title="', $txt['last_post'], '" style="float:left;" /></a> ', $topic['last_post']['member']['link'] , '<br />
 							<img src="',$settings['images_url'],'/rmrk7/iconic/gray_light/calendar_alt_fill_12x12.png" alt=""style="float:left;" /> ', $topic['last_post']['time'],'
 						</p>
 					</td>';
@@ -327,7 +323,7 @@ function template_main()
 		{
 			echo '
 				<tr class="titlebg">
-					<td colspan="6" align="right">
+					<td colspan="5" align="right">
 						<select class="qaction" name="qaction"', $context['can_move'] ? ' onchange="this.form.moveItTo.disabled = (this.options[this.selectedIndex].value != \'move\');"' : '', '>
 							<option value="">--------</option>', $context['can_remove'] ? '
 							<option value="remove">' . $txt['quick_mod_remove'] . '</option>' : '', $context['can_lock'] ? '

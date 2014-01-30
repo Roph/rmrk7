@@ -25,6 +25,7 @@ html:before {
 	box-shadow: 0px 0px 55px #999 inset;
 	pointer-events:none;
 	z-index:1000;
+	background-color: transparent;
 }
 
 div.messageindex_avatar {
@@ -50,7 +51,7 @@ p.online_list {
 
 p.online_list a {
 	border-bottom: 1px solid;
-	padding: 3px;
+	padding: 1px 6px;
 	border-radius: 3px;
 	background: #4F3E78 url(../images/rmrk7/alpha/25.png) repeat; /* Background colour overridden if the user is special */
 }
@@ -498,13 +499,11 @@ em
 .smalltext, tr.smalltext th
 {
 	font-size: 0.85em;
-	font-family: verdana, sans-serif;
 }
 .middletext
 {
 	font-size: 0.9em;
 	line-height: 1em;
-	font-family: verdana, sans-serif;
 }
 .normaltext
 {
@@ -559,25 +558,25 @@ ul.reset, ul.reset li
 /* A quote, perhaps from another post. */
 blockquote.bbc_standard_quote, blockquote.bbc_alternate_quote
 {
-	font-size: x-small;
+	font-size: 98%;
 	color: #000;
 	line-height: 1.4em;
 	background: url(../images/theme/quote.png) 0.1em 0.1em no-repeat;
-	border-top: 2px solid #99A;
-	border-bottom: 2px solid #99A;
+	border: 1px solid #C7BEDC;
 	padding: 1.1em 1.4em;
 	margin: 0.1em 0 0.3em 0;
 	overflow: auto;
+	border-left: 3px solid #C7BEDC;
 }
 
 /* Alterate blockquote stylings */
 blockquote.bbc_standard_quote
 {
-	background-color: #d7daec;
+	background-color: #dedede;
 }
 blockquote.bbc_alternate_quote
 {
-	background-color: #e7eafc;
+	background-color: #e7e7e7;
 }
 
 /* A code block - maybe PHP ;). */
@@ -587,8 +586,8 @@ code.bbc_code
 	font-family: "dejavu sans mono", "monaco", "lucida console", "courier new", monospace;
 	font-size: x-small;
 	background: #eef;
-	border-top: 2px solid #999;
-	border-bottom: 2px solid #999;
+	border: 1px solid #999;
+	border-left: 3px solid #999;
 	line-height: 1.5em;
 	padding: 3px 1em;
 	overflow: auto;
@@ -601,7 +600,7 @@ code.bbc_code
 .codeheader, .quoteheader
 {
 	color: #666;
-	font-size: x-small;
+	font-size: 110%;
 	font-weight: bold;
 	padding: 0 0.3em;
 }
@@ -691,7 +690,6 @@ code.bbc_code
 .titlebg, .titlebg2, tr.titlebg th, tr.titlebg td, tr.titlebg2 td
 {
 	color: #222;
-	font-family: arial, helvetica, sans-serif;
 	font-size: 1.1em;
 	font-weight: bold;
 	background: #fff;
@@ -699,7 +697,6 @@ code.bbc_code
 .catbg, .catbg2, tr.catbg td, tr.catbg2 td, tr.catbg th, tr.catbg2 th
 {
 	color: #111;
-	font-family: 'Alegreya Sans', arial, helvetica, sans-serif;
 	font-size: 1.1em;
 	font-weight: bold;
 	background: #fff;
@@ -787,22 +784,22 @@ div.pagesection div.floatright input
 /* Sticky topics get a different background */
 .stickybg
 {
-	background: #e8d8cf;
+	background: #E1DCED;
 }
 .stickybg2
 {
-	background: #f2e3d9;
+	background: #E1DCED;
 }
 
 /* Locked posts get a different shade, too! */
 .lockedbg
 {
-	background: #d4dce2;
+	background: #ccc;
 	font-style: italic;
 }
 .lockedbg2
 {
-	background: #d8e1e7;
+	background: #ccc;
 	font-style: italic;
 }
 
@@ -1886,7 +1883,6 @@ table.table_list tbody.content td.icon
 p.moderators
 {
 	font-size: 0.8em;
-	font-family: verdana, sans-serif;
 }
 /* hide the table header/footer parts - but its here for those needing to style it */
 #boardindex_table .table_list thead, #boardindex_table .table_list tfoot
@@ -2190,6 +2186,8 @@ div#pollmoderation
 #forumposts
 {
 	clear: both;
+	background: #fff;
+	border-radius: 4px;
 }
 #forumposts .cat_bar
 {
@@ -2219,8 +2217,6 @@ p#whoisviewing
 {
 	float:left;
 	width:100%;
-	background: #e7e7e7 url(../images/rmrk7/multibar.png) top left repeat-x;
-	border-radius: 5px;
 }
 .poster
 {
@@ -2415,6 +2411,13 @@ img.smiley
 {
 	clear: both;
 }
+
+#forumposts div.windowbg, #forumposts div.windowbg2 {
+	margin: 5px 10px 25px 10px;
+	background: #fff url(../images/rmrk7/multibar.png) top left repeat-x;
+	box-shadow: 2px 2px 9px #aaa;
+}
+
 .attachments hr
 {
 	clear: both;

@@ -100,7 +100,7 @@ function template_main()
 		echo '
 			<tbody class="header" id="category_', $category['id'], '">
 				<tr>
-					<td colspan="4">
+					<td colspan="3">
 						<div class="cat_bar">
 							<h3 class="catbg">';
 
@@ -175,8 +175,6 @@ function template_main()
 
 				// Show some basic information about the number of posts, etc.
 					echo '
-					</td>
-					<td class="stats windowbg">
 					</td>
 					<td class="lastpost">';
 
