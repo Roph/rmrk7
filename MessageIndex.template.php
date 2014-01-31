@@ -31,7 +31,7 @@ function template_main()
 		foreach ($context['boards'] as $board)
 		{
 			echo '
-				<tr id="board_', $board['id'], '" class="windowbg2">
+				<tr id="board_', $board['id'], '" class="windowbg2 boardindex">
 					<td class="icon windowbg"', !empty($board['children']) ? ' rowspan="2"' : '', '>
 						<a href="', ($board['is_redirect'] || $context['user']['is_guest'] ? $board['href'] : $scripturl . '?action=unread;board=' . $board['id'] . '.0;children'), '">';
 
@@ -52,7 +52,8 @@ function template_main()
 						</a>
 					</td>
 					<td class="info">
-						<a class="subject" href="', $board['href'], '" name="b', $board['id'], '">', $board['name'], '</a>';
+						<a class="subject" href="', $board['href'], '" name="b', $board['id'], '">', $board['name'], '</a> <span class="boardtotals"><img src="'.$settings['images_url'].'/rmrk7/iconic/gray_light/article_8x8.png" alt="'.$txt['posts'].'"/> ', comma_format($board['posts']), ' ', $board['is_redirect'] ? $txt['redirects'] : '', ' 
+						', $board['is_redirect'] ? '' : '<img src="'.$settings['images_url'].'/rmrk7/iconic/gray_light/book_alt2_8x7.png" alt="'.$txt['topics'].'"/> '.comma_format($board['topics']),'</span>';
 
 			// Has it outstanding posts for approval?
 			if ($board['can_approve_posts'] && ($board['unapproved_posts'] || $board['unapproved_topics']))
@@ -71,11 +72,6 @@ function template_main()
 			// Show some basic information about the number of posts, etc.
 			echo '
 					</td>
-					<td class="stats windowbg">
-						<p>', comma_format($board['posts']), ' ', $board['is_redirect'] ? $txt['redirects'] : $txt['posts'], ' <br />
-						', $board['is_redirect'] ? '' : comma_format($board['topics']) . ' ' . $txt['board_topics'], '
-						</p>
-					</td>
 					<td class="lastpost">';
 
 			/* The board's and children's 'last_post's have:
@@ -84,9 +80,9 @@ function template_main()
 			and member. (which has id, name, link, href, username in it.) */
 			if (!empty($board['last_post']['id']))
 				echo '
-						<p><strong>', $txt['last_post'], '</strong>  ', $txt['by'], ' ', $board['last_post']['member']['link'], '<br />
-						', $txt['in'], ' ', $board['last_post']['link'], '<br />
-						', $txt['on'], ' ', $board['last_post']['time'],'
+						<p style="line-height: 19px;"><img src="',$settings['images_url'],'/rmrk7/iconic/gray_light/arrow_down_alt1_12x12.png" alt="', $txt['last_post'], '" title="', $txt['last_post'], '" style="float:left;" /> ', $board['last_post']['member']['link'] , '<br />
+						<img src="',$settings['images_url'],'/rmrk7/iconic/gray_light/chat_12x12.png" alt=""style="float:left;" /> ', $board['last_post']['link'], '<br />
+						<img src="',$settings['images_url'],'/rmrk7/iconic/gray_light/calendar_alt_fill_12x12.png" alt=""style="float:left;" /> ', $board['last_post']['time'],'
 						</p>';
 
 			echo '
@@ -177,12 +173,12 @@ function template_main()
 			// Show a "select all" box for quick moderation?
 			if (empty($context['can_quick_mod']))
 				echo '
-					<th scope="col" class="lefttext last_th" width="18%"><span class="messageindex_columnheaders">
+					<th scope="col" class="lefttext last_th" width="22%"><span class="messageindex_columnheaders">
 						<a href="', $scripturl, '?board=', $context['current_board'], '.', $context['start'], ';sort=last_post', $context['sort_by'] == 'last_post' && $context['sort_direction'] == 'up' ? ';desc' : '', '">', $txt['last_post'], $context['sort_by'] == 'last_post' ? ' <img src="' . $settings['images_url'] . '/sort_' . $context['sort_direction'] . '.gif" alt="" />' : '', '</a>
 					</span></th>';
 			else
 				echo '
-					<th scope="col" class="lefttext" width="18%"><span class="messageindex_columnheaders">
+					<th scope="col" class="lefttext" width="22%"><span class="messageindex_columnheaders">
 						<a href="', $scripturl, '?board=', $context['current_board'], '.', $context['start'], ';sort=last_post', $context['sort_by'] == 'last_post' && $context['sort_direction'] == 'up' ? ';desc' : '', '">', $txt['last_post'], $context['sort_by'] == 'last_post' ? ' <img src="' . $settings['images_url'] . '/sort_' . $context['sort_direction'] . '.gif" alt="" />' : '', '</a>
 					</span></th>';
 

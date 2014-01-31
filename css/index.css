@@ -2414,8 +2414,13 @@ img.smiley
 
 #forumposts div.windowbg, #forumposts div.windowbg2 {
 	margin: 5px 10px 25px 10px;
-	background: #fff url(../images/rmrk7/multibar.png) top left repeat-x;
+	background: #fff url(../images/rmrk7/postbg.png) top left no-repeat;
 	box-shadow: 2px 2px 9px #aaa;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	padding-top: 5px;
+	padding-left: 5px;
+	padding-bottom: 5px;
 }
 
 .attachments hr
