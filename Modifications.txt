@@ -65,6 +65,8 @@ Replace with:
 
 Allowing avatar display on unread / unreadreplies: In Sources/Recent.php:
 
+	#WARNING: You are looking for the SECOND occurrence of the "//And build the array." comment!
+
 Find:
 
 		// And build the array.
@@ -97,10 +99,10 @@ Replace with:
 			loadMemberData(array($row['id_first_member']), false, 'normal');
 			loadMemberContext($row['id_first_member']);
 		}
-			elseif (!isset($memberContext[$row['last_id_member']]))
+			elseif (!isset($memberContext[$row['id_last_member']]))
 		{
-			loadMemberData(array($row['last_id_member']), false, 'normal');
-			loadMemberContext($row['last_id_member']);
+			loadMemberData(array($row['id_last_member']), false, 'normal');
+			loadMemberContext($row['id_last_member']);
 		}
 		$context['topics'][$row['id_topic']] = array(
 			'id' => $row['id_topic'],
