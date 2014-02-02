@@ -258,7 +258,7 @@ function template_main()
 					</td>
 					<td class="subject ', $alternate_class, '">
 						<div ', (!empty($topic['quick_mod']['modify']) ? 'id="topic_' . $topic['first_post']['id'] . '" onmouseout="mouse_on_div = 0;" onmouseover="mouse_on_div = 1;" ondblclick="modify_topic(\'' . $topic['id'] . '\', \'' . $topic['first_post']['id'] . '\');"' : ''), '>
-							', $topic['is_sticky'] ? '<strong>' : '', '<span class="messageindex_topictitle" id="msg_' . $topic['first_post']['id'] . '">', $topic['first_post']['link'], (!$context['can_approve_posts'] && !$topic['approved'] ? '&nbsp;<em>(' . $txt['awaiting_approval'] . ')</em>' : ''), '</span>', $topic['is_sticky'] ? '</strong>' : '';
+							', $topic['is_sticky'] ? '<strong>' : '', '<span class="messageindex_topictitle', ($context['user']['is_logged'] && $context['user']['id'] == $topic['first_post']['member']['id']) ? '_op' : '' ,'" id="msg_' . $topic['first_post']['id'] . '">', $topic['first_post']['link'], (!$context['can_approve_posts'] && !$topic['approved'] ? '&nbsp;<em>(' . $txt['awaiting_approval'] . ')</em>' : ''), '</span>', $topic['is_sticky'] ? '</strong>' : '';
 							
 			//Show our views / replies count next to the topic title.
 			echo ' <span class="topicstats"> <img src="',$settings['images_url'],'/rmrk7/iconic/gray_light/eye_12x9.png" alt="', $topic['views'], '" /> ', $topic['views'], ' 

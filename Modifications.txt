@@ -60,9 +60,73 @@ Replace with:
 					'link' => '<a href="' . $scripturl . '?topic=' . $row['id_topic'] . '.0">' . $row['first_subject'] . '</a>'
 				),
 				
-==============================================================================================================================================
+=====================================================================================================================================================
 
-Allowing a border around online list usernames, define a border colour in Sources/Subs-MembersOnline.php: 
+
+Allowing avatar display on unread / unreadreplies: In Sources/Recent.php:
+
+Find:
+
+		// And build the array.
+		$context['topics'][$row['id_topic']] = array(
+			'id' => $row['id_topic'],
+			'first_post' => array(
+				'id' => $row['id_first_msg'],
+				'member' => array(
+					'name' => $row['first_poster_name'],
+					'id' => $row['id_first_member'],
+					'href' => $scripturl . '?action=profile;u=' . $row['id_first_member'],
+					'link' => !empty($row['id_first_member']) ? '<a href="' . $scripturl . '?action=profile;u=' . $row['id_first_member'] . '" title="' . $txt['profile_of'] . ' ' . $row['first_poster_name'] . '">' . $row['first_poster_name'] . '</a>' : $row['first_poster_name']
+				),
+				'time' => timeformat($row['first_poster_time']),
+				'timestamp' => forum_time(true, $row['first_poster_time']),
+				'subject' => $row['first_subject'],
+				'preview' => $row['first_body'],
+				'icon' => $row['first_icon'],
+				'icon_url' => $settings[$context['icon_sources'][$row['first_icon']]] . '/post/' . $row['first_icon'] . '.gif',
+				'href' => $scripturl . '?topic=' . $row['id_topic'] . '.0;topicseen',
+				'link' => '<a href="' . $scripturl . '?topic=' . $row['id_topic'] . '.0;topicseen">' . $row['first_subject'] . '</a>'
+			),
+
+Replace with:
+
+		// And build the array.
+		global $memberContext;
+		if (!isset($memberContext[$row['id_first_member']]))
+		{
+			loadMemberData(array($row['id_first_member']), false, 'normal');
+			loadMemberContext($row['id_first_member']);
+		}
+			elseif (!isset($memberContext[$row['last_id_member']]))
+		{
+			loadMemberData(array($row['last_id_member']), false, 'normal');
+			loadMemberContext($row['last_id_member']);
+		}
+		$context['topics'][$row['id_topic']] = array(
+			'id' => $row['id_topic'],
+			'first_post' => array(
+				'id' => $row['id_first_msg'],
+				'member' => array(
+					'name' => $row['first_poster_name'],
+					'id' => $row['id_first_member'],
+					'href' => $scripturl . '?action=profile;u=' . $row['id_first_member'],
+					'link' => !empty($row['id_first_member']) ? '<a href="' . $scripturl . '?action=profile;u=' . $row['id_first_member'] . '" title="' . $txt['profile_of'] . ' ' . $row['first_poster_name'] . '">' . $row['first_poster_name'] . '</a>' : $row['first_poster_name'],
+					'avatar' => !empty($memberContext[$row['id_first_member']]['avatar']['image']) ? $memberContext[$row['id_first_member']]['avatar'] : ''
+				),
+				'time' => timeformat($row['first_poster_time']),
+				'timestamp' => forum_time(true, $row['first_poster_time']),
+				'subject' => $row['first_subject'],
+				'preview' => $row['first_body'],
+				'icon' => $row['first_icon'],
+				'icon_url' => $settings[$context['icon_sources'][$row['first_icon']]] . '/post/' . $row['first_icon'] . '.gif',
+				'href' => $scripturl . '?topic=' . $row['id_topic'] . '.0;topicseen',
+				'link' => '<a href="' . $scripturl . '?topic=' . $row['id_topic'] . '.0;topicseen">' . $row['first_subject'] . '</a>'
+			),
+				
+=====================================================================================================================================================
+
+
+Allowing wider use of membergroup colours in the online list: Sources/Subs-MembersOnline.php: 
 
 Find:
 

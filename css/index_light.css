@@ -39,10 +39,15 @@ div.messageindex_avatar {
 	background-repeat: none;
 }
 
-span.messageindex_topictitle {
+span.messageindex_topictitle, span.messageindex_topictitle_op {
 	font-family: 'Titillium Web', arial, helvetica, sans-serif;
 	font-weight: bold;
 	font-size: 20px;
+}
+
+span.messageindex_topictitle_op a {
+	background: url(../images/rmrk7/op_indicator.png) top left no-repeat;
+	padding-left: 2px;
 }
 
 p.online_list {
@@ -160,7 +165,7 @@ div.karma {
 	width: 105px;
 	height: 8px;
 	padding: 0;
-	margin: 0 auto;
+	margin: 2px auto;
 }
 
 div.karma div {
@@ -171,7 +176,7 @@ div.exp {
 	width: 105px;
 	height: 8px;
 	padding: 0;
-	margin: 0 auto;
+	margin: 2px auto;
 	background: url(../images/rmrk7/barbg.png) center center no-repeat;
 }
 
@@ -179,6 +184,7 @@ div.awards {
 	width: 159px;
 	height: 16px;
 	overflow: hidden;
+	margin-top: 4px;
 }
 
 div.awards img {
@@ -232,6 +238,7 @@ table td.children {
 
 span.topicstats {
 	font-size: 90%;
+	white-space:nowrap;
 }
 
 span.board_description {
@@ -260,6 +267,11 @@ table.table_grid tr.whos_viewing td {
 table.table_grid:hover tr.whos_viewing td {
 	opacity: 1.0;
 }
+
+span.rep img{
+	vertical-align: middle;
+}
+
 
 /* Basic SMF Stuff*/
 

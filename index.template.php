@@ -71,7 +71,10 @@ function template_init()
 	$settings['message_index_preview'] = false;
 
 	/* Set the following variable to true if this theme requires the optional theme strings file to be loaded. */
-	$settings['require_theme_strings'] = false;
+	$settings['require_theme_strings'] = true;
+	
+	/* We have different variants of this theme for our users. */
+	$settings['theme_variants'] = array('light', 'dark');
 }
 
 // The main sub template above the content.

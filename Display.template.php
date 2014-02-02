@@ -423,7 +423,7 @@ function template_main()
 			<div class="postbit">
 				<div class="postbit-container">
 					<div class="postbit-header',$message['member']['is_topic_starter'] ? '-op' : '','">
-						',$message['member']['link'],'<img src="',$message['member']['online']['image_href'],'" alt="',$message['member']['online']['text'],'" title="',$message['member']['online']['text'],'" />',empty($message['member']['gender']['image']) ? '' : $message['member']['gender']['image'],'
+						<a href="',$scripturl,'?action=profile;u=',$message['member']['id'],'" title="',$message['member']['username'],'">',$message['member']['name'],'</a><img src="',$message['member']['online']['image_href'],'" alt="',$message['member']['online']['text'],'" title="',$message['member']['online']['text'],'" />',empty($message['member']['gender']['image']) ? '' : $message['member']['gender']['image'],'
 					</div>
 					<div class="postbit-avatar">
 						<span></span>';
@@ -458,11 +458,11 @@ function template_main()
 								$karma_positive = ($message['member']['karma']['good'] / $karma_sum * 100);
 								$karma_negative = ($message['member']['karma']['bad'] / $karma_sum * 100);
 								
-								echo '
+								echo '<span class="rep">
 								',$modSettings['karmaLabel']; 
 								if ($message['member']['karma']['allow']) echo '
-									<a href="', $scripturl, '?action=modifykarma;sa=applaud;uid=', $message['member']['id'], ';topic=', $context['current_topic'], '.' . $context['start'], ';m=', $message['id'], ';sesc=', $context['session_id'], '">', $modSettings['karmaApplaudLabel'], '</a>
-									<a href="', $scripturl, '?action=modifykarma;sa=smite;uid=', $message['member']['id'], ';topic=', $context['current_topic'], '.', $context['start'], ';m=', $message['id'], ';sesc=', $context['session_id'], '">', $modSettings['karmaSmiteLabel'], '</a><br />';
+									<a href="', $scripturl, '?action=modifykarma;sa=applaud;uid=', $message['member']['id'], ';topic=', $context['current_topic'], '.' . $context['start'], ';m=', $message['id'], ';sesc=', $context['session_id'], '"><img src="',$settings['images_url'],'/rmrk7/thumb_up.png" alt="rep+" /></a>
+									<a href="', $scripturl, '?action=modifykarma;sa=smite;uid=', $message['member']['id'], ';topic=', $context['current_topic'], '.', $context['start'], ';m=', $message['id'], ';sesc=', $context['session_id'], '"><img src="',$settings['images_url'],'/rmrk7/thumb_down.png" alt="rep-" /></a></span><br />';
 									$inline_vote = true;
 								echo '<div class="karma">
 									<div style="background:url(',$settings['images_url'],'/rmrk7/barrepgood.png) top left; width:',$karma_positive,'%; float:left;"></div><div style="background:url(',$settings['images_url'],'/rmrk7/barrepbad.png) top right; width:',$karma_negative,'%; float:left;"></div>
@@ -472,8 +472,8 @@ function template_main()
 
 						// Is this user allowed to modify this member's karma?
 						if ($message['member']['karma']['allow'] && !$inline_vote) echo '
-								<a href="', $scripturl, '?action=modifykarma;sa=applaud;uid=', $message['member']['id'], ';topic=', $context['current_topic'], '.' . $context['start'], ';m=', $message['id'], ';sesc=', $context['session_id'], '">', $modSettings['karmaApplaudLabel'], '</a>
-								<a href="', $scripturl, '?action=modifykarma;sa=smite;uid=', $message['member']['id'], ';topic=', $context['current_topic'], '.', $context['start'], ';m=', $message['id'], ';sesc=', $context['session_id'], '">', $modSettings['karmaSmiteLabel'], '</a><br />';
+								<a href="', $scripturl, '?action=modifykarma;sa=applaud;uid=', $message['member']['id'], ';topic=', $context['current_topic'], '.' . $context['start'], ';m=', $message['id'], ';sesc=', $context['session_id'], '"><img src="',$settings['images_url'],'/rmrk7/thumb_up.png" alt="rep+" /></a>
+								<a href="', $scripturl, '?action=modifykarma;sa=smite;uid=', $message['member']['id'], ';topic=', $context['current_topic'], '.', $context['start'], ';m=', $message['id'], ';sesc=', $context['session_id'], '"><img src="',$settings['images_url'],'/rmrk7/thumb_down.png" alt="rep-" /></a><br />';
 								
 						//Since we're in a loop, reset inline voting.
 						$inline_vote = false;
