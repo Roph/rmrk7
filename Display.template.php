@@ -16,7 +16,7 @@ function template_main()
 	
 	function formatDate($time) {
 			if ($time >= strtotime("today 00:00")) {
-				return date("g:i A", $time);
+				return "Today at ".date("g:i A", $time);
 			} elseif ($time >= strtotime("yesterday 00:00")) {
 				return "Yesterday at " . date("g:i A", $time);
 			} elseif ($time >= strtotime("-6 day 00:00")) {
@@ -423,7 +423,7 @@ function template_main()
 			<div class="postbit">
 				<div class="postbit-container">
 					<div class="postbit-header',$message['member']['is_topic_starter'] ? '-op' : '','">
-						<a href="',$scripturl,'?action=profile;u=',$message['member']['id'],'" title="',$message['member']['username'],'">',$message['member']['name'],'</a><img src="',$message['member']['online']['image_href'],'" alt="',$message['member']['online']['text'],'" title="',$message['member']['online']['text'],'" />',empty($message['member']['gender']['image']) ? '' : $message['member']['gender']['image'],'
+						<a href="',$scripturl,'?action=profile;u=',$message['member']['id'],'" title="',$message['member']['username'],'">',$message['member']['name'],'</a><img src="',$message['member']['online']['image_href'],'" alt="',$message['member']['online']['text'],'" title="',$message['member']['online']['text'],'" style="padding-left: 1px;" />',empty($message['member']['gender']['image']) ? '' : $message['member']['gender']['image'],'
 					</div>
 					<div class="postbit-avatar">
 						<span></span>';
@@ -464,7 +464,7 @@ function template_main()
 									<a href="', $scripturl, '?action=modifykarma;sa=applaud;uid=', $message['member']['id'], ';topic=', $context['current_topic'], '.' . $context['start'], ';m=', $message['id'], ';sesc=', $context['session_id'], '"><img src="',$settings['images_url'],'/rmrk7/thumb_up.png" alt="rep+" /></a>
 									<a href="', $scripturl, '?action=modifykarma;sa=smite;uid=', $message['member']['id'], ';topic=', $context['current_topic'], '.', $context['start'], ';m=', $message['id'], ';sesc=', $context['session_id'], '"><img src="',$settings['images_url'],'/rmrk7/thumb_down.png" alt="rep-" /></a></span><br />';
 									$inline_vote = true;
-								echo '<div class="karma">
+								echo '<div class="karma" title="+',$message['member']['karma']['good'],' / -',$message['member']['karma']['bad'],'">
 									<div style="background:url(',$settings['images_url'],'/rmrk7/barrepgood.png) top left; width:',$karma_positive,'%; float:left;"></div><div style="background:url(',$settings['images_url'],'/rmrk7/barrepbad.png) top right; width:',$karma_negative,'%; float:left;"></div>
 								</div>';
 							}	
@@ -487,7 +487,7 @@ function template_main()
 							';
 						
 						//Output a fancy level bar. Later, users might choose their own appearance.
-						echo '<div class="exp"><div style="background:url(',$settings['images_url'],'/rmrk7/barexp.png) left center no-repeat; width: '.$number[1].'%; height: 8px;"></div></div>';
+						echo '<div class="exp" title="User #',$message['member']['id'],', ',$message['member']['real_posts'],' Posts"><div style="background:url(',$settings['images_url'],'/rmrk7/barexp.png) left center no-repeat; width: '.$number[1].'%; height: 8px;"></div></div>';
 						
 						
 						//Does the user have any personal text?
@@ -741,6 +741,23 @@ function template_main()
 					<span class="botslice"><span></span></span>
 				</div>
 				<hr class="post_separator" />';
+				
+		//Gotta pay for this server somehow :(		
+		if(!$inline_ad) { //Eventually we can check $context['theme_variant'] for "_light" or "_dark".
+		echo '
+				<div class="windowbg block_this_div_to_hide_this_ad" style="border-bottom-left-radius: 5px; padding: 15px; text-align: center;">
+					<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<!-- RMRK7-728x90-Light -->
+					<ins class="adsbygoogle"
+						 style="display:inline-block;width:728px;height:90px"
+						 data-ad-client="ca-pub-7302574677795924"
+						 data-ad-slot="8894737398"></ins>
+					<script>
+					(adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+				</div>';
+		$inline_ad = true;
+		}
 	}
 
 	echo '

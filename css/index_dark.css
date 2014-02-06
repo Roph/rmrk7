@@ -46,8 +46,8 @@ span.messageindex_topictitle, span.messageindex_topictitle_op {
 }
 
 span.messageindex_topictitle_op a {
-	background: url(../images/rmrk7/op_indicator.png) top left no-repeat;
-	padding-left: 2px;
+	/*background: url(../images/rmrk7/op_indicator.png) top left no-repeat; */
+	padding-left: 0px;
 }
 
 p.online_list {
@@ -238,6 +238,7 @@ table td.children {
 
 span.topicstats {
 	font-size: 90%;
+	white-space:nowrap;
 }
 
 span.board_description {
@@ -269,6 +270,23 @@ table.table_grid:hover tr.whos_viewing td {
 
 span.rep img{
 	vertical-align: middle;
+}
+
+div#quicklinks {
+	text-align: center;
+	padding-bottom: 10px;
+	margin-bottom: 15px;
+	border-bottom: 1px dashed #bbb;
+}
+
+div#quicklinks span {
+	white-space:nowrap;
+	padding: 0px 10px;
+}
+
+div#quicklinks span img {
+	vertical-align: middle;
+	padding-right: 5px;
 }
 
 

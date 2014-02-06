@@ -276,6 +276,7 @@ div#quicklinks {
 	text-align: center;
 	padding-bottom: 10px;
 	margin-bottom: 15px;
+	margin-top: 15px;
 	border-bottom: 1px dashed #bbb;
 }
 
@@ -289,6 +290,14 @@ div#quicklinks span img {
 	padding-right: 5px;
 }
 
+div#personal_messages div.flow_hidden {
+	height: 100%;
+	overflow: visible;
+}
+
+div#personal_messages div.keyinfo {
+	overflow: visible;
+}
 
 /* Basic SMF Stuff*/
 
@@ -374,7 +383,7 @@ input, button, select, textarea
 	font: 95%/115% verdana, Helvetica, sans-serif;
 	color: #000;
 	background: #fff;
-	border: 1px solid #7f9db9;
+	border: 1px solid #999;
 	padding: 2px;
 }
 
@@ -399,19 +408,39 @@ textarea
 /* Buttons should be styled a bit differently, in order to make them look more button'ish. */
 .button_submit, .button_reset
 {
-	background: #cde7ff url(../images/theme/submit_bg.png) no-repeat;
-	border: 1px solid #aaa;
 	cursor: pointer;
-	font-weight: normal;
+	font-size: 1.1em;
+	color: #000;
+	background: #CFC7E1;
+	padding: 1px 3px;
+	margin-left: 2px;
+	cursor: pointer;
+	border: none;
+	font-family: 'Titillium Web', "Verdana", "Arial", "Helvetica", sans-serif;
+	font-weight: bold;
+	border-radius: 2px;
+	border-bottom: 1px solid #604B91;
+	transition: background 100ms ease-in;
 }
-input:hover, textarea:hover, button:hover, select:hover
+input:hover, textarea:hover, select:hover
 {
 	border: 1px solid #454545;
 }
 .button_submit:hover, .button_reset:hover
 {
-	border: 1px solid #aaa;
-	background: url(../images/theme/submit_bg.png) no-repeat 0 -140px #cde7ff;
+	cursor: pointer;
+	font-size: 1.1em;
+	color: #fff;
+	background: #413363;
+	padding: 1px 3px;
+	margin-left: 2px;
+	cursor: pointer;
+	border: none;
+	font-family: 'Titillium Web', "Verdana", "Arial", "Helvetica", sans-serif;
+	font-weight: bold;
+	border-radius: 2px;
+	border-bottom: 1px solid #604B91;
+	transition: background 100ms ease-in;
 }
 input:focus, textarea:focus, button:focus, select:focus
 {
@@ -1828,7 +1857,7 @@ div#upper_section div.news form
 {
 	background: #ffffff;
 	display: block;
-	padding: 60px 0 0 0;
+	padding: 10px 0 0 0;
 }
 #footer_section ul li, #footer_section p
 {
@@ -2442,9 +2471,9 @@ img.smiley
 }
 
 #forumposts div.windowbg, #forumposts div.windowbg2 {
-	margin: 5px 10px 25px 10px;
+	margin: 5px 10px 10px 10px;
 	background: #fff url(../images/rmrk7/postbg.png) top left no-repeat;
-	box-shadow: 2px 2px 9px #aaa;
+	box-shadow: 2px 2px 5px #a0a0a0;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 	padding-top: 5px;

@@ -91,7 +91,7 @@ function template_html_above()
 	echo '
 	<link rel="stylesheet" type="text/css" href="', $settings['theme_url'], '/css/index', $context['theme_variant'], '.css?fin20" />
 	<link href="http://fonts.googleapis.com/css?family=Titillium+Web:400,700|Alegreya+Sans:400,700" rel="stylesheet" type="text/css" />
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>';
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>';
 
 	// Some browsers need an extra stylesheet due to bugs/compatibility issues.
 	foreach (array('ie7', 'ie6', 'webkit') as $cssfix)
@@ -328,6 +328,17 @@ function template_body_below()
 	// Show the "Powered by" and "Valid" logos, as well as the copyright. Remember, the copyright must be somewhere!
 	echo '
 	<div id="footer_section"><div class="frame">
+		<div class="footer_ad_container">
+			<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+			<!-- RMRK7-728x90-Light -->
+			<ins class="adsbygoogle"
+				 style="display:inline-block;width:728px;height:90px"
+				 data-ad-client="ca-pub-7302574677795924"
+				 data-ad-slot="8894737398"></ins>
+			<script>
+			(adsbygoogle = window.adsbygoogle || []).push({});
+			</script>
+		</div>
 		
 		<div id="quicklinks">
 			<span><a href="http://wiki.rmrk.net"><img src="',$settings['images_url'],'/rmrk7/icon_wiki.png" alt=""/>RMRK Wiki</a></span>
