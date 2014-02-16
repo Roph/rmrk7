@@ -179,6 +179,51 @@ function template_html_above()
 	
 	*/
 	
+//We're giving project wonderful a try.
+echo '
+<script type="text/javascript">
+   (function(){function pw_load(){
+      if(arguments.callee.z)return;else arguments.callee.z=true;
+      var d=document;var s=d.createElement(\'script\');
+      var x=d.getElementsByTagName(\'script\')[0];
+      s.type=\'text/javascript\';s.async=true;
+      s.src=\'//www.projectwonderful.com/pwa.js\';
+      x.parentNode.insertBefore(s,x);}
+   if (window.attachEvent){
+    window.attachEvent(\'DOMContentLoaded\',pw_load);
+    window.attachEvent(\'onload\',pw_load);}
+   else{
+    window.addEventListener(\'DOMContentLoaded\',pw_load,false);
+    window.addEventListener(\'load\',pw_load,false);}})();
+</script>';
+	
+//Valentines day!
+if (($context['user']['is_logged'] && !isset($_COOKIE['RMRKvalentines']) && (date("n_j") == "2_14")) || isset($_GET['valentines'])) {
+echo '<script type="text/javascript">
+	function SetCookie(c_name,value,expiredays)
+	{
+		var exdate=new Date()
+		exdate.setDate(exdate.getDate()+expiredays)
+		document.cookie=c_name+ "=" +escape(value)+
+		((expiredays==null) ? "" : ";expires="+exdate.toGMTString())
+	}
+</script>
+<div style="width:100%; padding: 30px 50px; line-height: 200%; background: #f00 url(http://rmrk.net/src/heart.png) 75% 50% no-repeat; color: #fff; font-weight: bold;border-bottom: 10px solid #D40000;">
+	<span style="font-size: 160%;">Hey, ',$context['user']['name'],'. </span><span style="font-size:80%;color: #FF6F72;"> You\'ve spent ',$context['user']['total_time_logged_in']['days'],' day(s) and ',$context['user']['total_time_logged_in']['hours'],' hour(s) with us.</span><br /><div style="width: 65%;">';
+	
+	if($context['user']['total_time_logged_in']['days'] < 1) echo 'Though you haven\'t been around much yet, we\'d like to express our gratitude and we appreciate you being around. Here\'s to hoping you have a great Valentines Day with someone you care about very much.';
+	elseif($context['user']['total_time_logged_in']['days'] < 2) echo 'You\'ve not been around as long as some members, but here\'s a little message to show we appreciate you all the same. We at RMRK hope you have a lovely valentines day with someone special to you.';
+	elseif($context['user']['total_time_logged_in']['days'] < 7) echo 'Happy Valentines day from us at RMRK, thank you for contributing and posting for so long. We hope you stay with us for next year\'s Valentines too!';
+	elseif($context['user']['total_time_logged_in']['days'] < 20) echo 'It\'s Valentines day, and we at RMRK just wanted to say thank you for being such an active member. We really appreciate you, and hope you have a wonderful day with someone you love.<br />Happy Valentines, ',$context['user']['name'],'!';
+	else echo 'You\'ve been with us for such a long time - you\'re awesome! Have a great Valentines day with someone special.<br />XOXOX RMRK~';
+	
+	echo'<br /><br />
+	<a href="',$scripturl,'" onClick="SetCookie(\'RMRKvalentines\',\'Loved\',\'7\')" style="border: 1px solid #FF6F72;border-radius:3px;padding:5px;color:#fff;font-size:90%;">Aw, shucks. Thanks!</a>
+	
+</div></div>';
+
+}
+	
 }
 
 
@@ -312,6 +357,14 @@ function template_body_above()
 		<div id="main_content_section">';
 
 	// Custom banners and shoutboxes should be placed here, before the linktree.
+	// Don't mind if I do.
+	echo '<br /><div style="margin: 5px auto 0px auto; clear:both; width: 728px; text-align: center;"><span style="font-size: 80%; display:none;"><a href="http://wiki.rmrk.net/index.php/Project_Wonderful" target="_blank">Read more about advertising your project here</a></span>
+<div id="pw_adbox_72237_5_0"></div>
+<script type="text/javascript"></script>
+<noscript><map name="admap72237" id="admap72237"><area href="http://www.projectwonderful.com/out_nojs.php?r=0&c=0&id=72237&type=5" shape="rect" coords="0,0,728,90" title="" alt="" target="_blank" /></map>
+<table cellpadding="0" cellspacing="0" style="width:728px;border-style:none;background-color:#ffffff;"><tr><td><img src="http://www.projectwonderful.com/nojs.php?id=72237&type=5" style="width:728px;height:90px;border-style:none;" usemap="#admap72237" alt="" /></td></tr><tr><td style="background-color:#ffffff;" colspan="1"><center><a style="font-size:10px;color:#0000ff;text-decoration:none;line-height:1.2;font-weight:bold;font-family:Tahoma, verdana,arial,helvetica,sans-serif;text-transform: none;letter-spacing:normal;text-shadow:none;white-space:normal;word-spacing:normal;" href="http://www.projectwonderful.com/advertisehere.php?id=72237&type=5" target="_blank">Ads by Project Wonderful!  Your ad here, right now: $0</a></center></td></tr></table>
+</noscript></div>
+';
 
 	// Show the navigation tree.
 	theme_linktree();
@@ -329,14 +382,16 @@ function template_body_below()
 	echo '
 	<div id="footer_section"><div class="frame">
 		<div class="footer_ad_container">
-			<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-			<!-- RMRK7-728x90-Light -->
-			<ins class="adsbygoogle"
-				 style="display:inline-block;width:728px;height:90px"
-				 data-ad-client="ca-pub-7302574677795924"
-				 data-ad-slot="8894737398"></ins>
-			<script>
-			(adsbygoogle = window.adsbygoogle || []).push({});
+			<script type="text/javascript"><!--
+			google_ad_client = "ca-pub-7302574677795924";
+			/* RMRK7-728x90-Light */
+			google_ad_slot = "8894737398";
+			google_ad_width = 728;
+			google_ad_height = 90;
+			//-->
+			</script>
+			<script type="text/javascript"
+			src="//pagead2.googlesyndication.com/pagead/show_ads.js">
 			</script>
 		</div>
 		

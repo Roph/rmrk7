@@ -745,15 +745,17 @@ function template_main()
 		//Gotta pay for this server somehow :(		
 		if(!$inline_ad) { //Eventually we can check $context['theme_variant'] for "_light" or "_dark".
 		echo '
-				<div class="windowbg block_this_div_to_hide_this_ad" style="border-bottom-left-radius: 5px; padding: 15px; text-align: center;">
-					<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-					<!-- RMRK7-728x90-Light -->
-					<ins class="adsbygoogle"
-						 style="display:inline-block;width:728px;height:90px"
-						 data-ad-client="ca-pub-7302574677795924"
-						 data-ad-slot="8894737398"></ins>
-					<script>
-					(adsbygoogle = window.adsbygoogle || []).push({});
+				<div class="windowbg" style="border-bottom-left-radius: 5px; padding: 15px; text-align: center;">
+					<script type="text/javascript"><!--
+					google_ad_client = "ca-pub-7302574677795924";
+					/* RMRK7-728x90-Light */
+					google_ad_slot = "8894737398";
+					google_ad_width = 728;
+					google_ad_height = 90;
+					//-->
+					</script>
+					<script type="text/javascript"
+					src="//pagead2.googlesyndication.com/pagead/show_ads.js">
 					</script>
 				</div>';
 		$inline_ad = true;

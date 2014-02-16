@@ -7,7 +7,7 @@ a#logo {
 	float: left;
 	width: 225px;
 	height: 96px;
-	background: url(../images/rmrk7/logo_final_css_alternate2.png) top left no-repeat;
+	background: url(../images/_dark/logo.png) top left no-repeat;
 	transition: background 0s;
 }
 
@@ -22,7 +22,7 @@ html:before {
 	width:100%;
 	height:100%;
 	content:"";
-	box-shadow: 0px 0px 55px #999 inset;
+	box-shadow: 0px 0px 35px #000 inset;
 	pointer-events:none;
 	z-index:1000;
 	background-color: transparent;
@@ -62,7 +62,7 @@ p.online_list a {
 }
 
 p.online_list span#group_key a { /* But don't make our group key funky coloured */
-	background: #fff;
+	background: #292734;
 }
 
 div#user_search_section {
@@ -229,11 +229,9 @@ div.post_wrapper:hover ul.quickbuttons {
 table tr.boardindex td {
 	padding-bottom: 10px;
 	padding-top: 10px;
-	border-bottom: 1px dotted #bbb;
 }
 
 table td.children {
-	border-bottom: 1px dotted #bbb;
 }
 
 span.topicstats {
@@ -304,14 +302,14 @@ div#personal_messages div.keyinfo {
 /* Normal, standard links. */
 a:link, a:visited
 {
-	color: #4F3E78;
+	color: #9390A0;
 	text-decoration: none;
 	font-weight: bold;
 	transition:color 100ms ease-in, background 100ms ease-in;
 }
 a:hover
 {
-	color: #A89AC9;
+	color: #F1F1F3;
 	cursor: pointer;
 	transition:color 100ms ease-in, background 100ms ease-in;
 }
@@ -336,7 +334,7 @@ table
 /* Set a fontsize that will look the same in all browsers. */
 body
 {
-	background: #ffffff;
+	background: #35304E;
 	font: 85%/130% 'Titillium Web', "Verdana", "Arial", "Helvetica", sans-serif;
 	margin: 0 auto;
 	padding: 0;
@@ -351,7 +349,7 @@ body#help_popup
 /* use dark grey for the text, leaving #000 for headers etc */
 body, td, th, tr
 {
-	color: #444;
+	color: #bbb;
 }
 
 /* This division wraps the entire forum when a forum width is set. */
@@ -419,7 +417,7 @@ textarea
 	font-family: 'Titillium Web', "Verdana", "Arial", "Helvetica", sans-serif;
 	font-weight: bold;
 	border-radius: 2px;
-	border-bottom: 1px solid #604B91;
+	border-bottom: 1px solid #35304E;
 	transition: background 100ms ease-in;
 }
 input:hover, textarea:hover, select:hover
@@ -439,7 +437,7 @@ input:hover, textarea:hover, select:hover
 	font-family: 'Titillium Web', "Verdana", "Arial", "Helvetica", sans-serif;
 	font-weight: bold;
 	border-radius: 2px;
-	border-bottom: 1px solid #604B91;
+	border-bottom: 1px solid #35304E;
 	transition: background 100ms ease-in;
 }
 input:focus, textarea:focus, button:focus, select:focus
@@ -469,8 +467,8 @@ hr, .hrcolor
 {
 	height: 1px;
 	border: 0;
-	color: #ccc;
-	background-color: #ccc;
+	color: #999;
+	background-color: #999;
 }
 
 /* By default set the color on these tags as #000. */
@@ -783,18 +781,18 @@ tr.catbg th a:link, tr.catbg th a:visited, tr.catbg2 td a:link, tr.catbg2 td a:v
 /* Alternating backgrounds for posts, and several other sections of the forum. */
 .windowbg, #preview_body
 {
-	color: #000;
-	background-color: #fff;
+	color: #eee;
+	background-color: #292734;
 }
 .windowbg2
 {
-	color: #000;
-	background-color: #fff;
+	color: #eee;
+	background-color: #292734;
 }
 .windowbg3
 {
-	color: #000;
-	background-color: #cacdd3;
+	color: #eee;
+	background-color: #332E49;
 }
 
 /* the page navigation area */
@@ -1072,7 +1070,7 @@ h3.catbg, h3.catbg2, h3.titlebg, h4.titlebg, h4.catbg
 }
 h3.catbg a:link, h3.catbg a:visited, h4.catbg a:link, h4.catbg a:visited, h3.catbg, .table_list tbody.header td, .table_list tbody.header td a
 {
-	color: #333;
+	color: #fff;
 }
 h3.catbg2 a, h3.catbg2
 {
@@ -1080,12 +1078,12 @@ h3.catbg2 a, h3.catbg2
 }
 h3.catbg a:hover, h4.catbg a:hover, .table_list tbody.header td a:hover
 {
-	color: #000;
+	color: #fff;
 	text-decoration: underline;
 }
 h3.catbg2 a:hover
 {
-	color: #0f0;
+	color: #fff;
 	text-decoration: underline;
 }
 h3.titlebg a, h3.titlebg, h4.titlebg, h4.titlebg a
@@ -1094,7 +1092,7 @@ h3.titlebg a, h3.titlebg, h4.titlebg, h4.titlebg a
 }
 h3.titlebg a:hover, h4.titlebg a:hover
 {
-	color: #000;
+	color: #fff;
 	text-decoration: none;
 }
 h3.catbg img.icon, h4.titlebg img.icon
@@ -1109,12 +1107,12 @@ h4.catbg a.toggle img
 }
 h4.catbg, h4.catbg2 , h3.catbg , h3.catbg2 , .table_list tbody.header td.catbg
 {
-	background: #ffffff;
+	background: #586073;
 	padding-right: 9px;
 }
 h4.titlebg, h3.titlebg
 {
-	background: #ffffff;
+	background: #35304E;
 	padding-right: 9px;
 }
 h4.titlebg img.icon
@@ -1124,16 +1122,16 @@ h4.titlebg img.icon
 }
 div.cat_bar
 {
-	background: #ffffff;
+	background: #586073;
 	padding-left: 9px;
 	height: 31px;
 	overflow: hidden;
-	margin-bottom: 1px;
-	border-bottom: 1px solid #8E7CBA;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
 }
 div.title_bar
 {
-	background: #ffffff;
+	background: #35304E;
 	padding-left: 9px;
 	height: 31px;
 	overflow: hidden;
@@ -1144,16 +1142,16 @@ div.title_bar
 
 div.roundframe div.cat_bar
 {
-	background: #ffffff;
+	background: #586073;
 	margin-bottom: 0;
 }
 div.roundframe div.cat_bar h3.catbg
 {
-	background: #ffffff;
+	background: #586073;
 }
 div.title_barIC
 {
-	background: #ffffff;
+	background: #31364D;
 	padding-left: 9px;
 	height: 31px;
 	margin-bottom: 1px;
@@ -1164,7 +1162,8 @@ div.title_barIC img
 }
 div.title_barIC h4.titlebg
 {
-	background: #ffffff;
+	background: #31364D;
+	color: #fff;
 }
 #upshrinkHeaderIC p.pminfo
 {
@@ -1232,8 +1231,6 @@ table.table_grid
 table.table_grid td
 {
 	padding: 3px;
-	border-bottom: 1px solid #fff;
-	border-right: 1px solid #fff;
 }
 
 /* GenericList */
@@ -1349,7 +1346,6 @@ table.table_grid thead tr.catbg th
 .roundframe
 {
 	padding: 0;
-	background: #f5f5f5;
 }
 .roundframe dl, .roundframe dt, .roundframe p
 {
@@ -1363,7 +1359,7 @@ span.upperframe
 {
 	padding: 0;
 	display: block;
-	background: #ffffff;
+	background: #35304E;
 	padding-left: 20px;
 }
 span.upperframe span
@@ -1371,13 +1367,13 @@ span.upperframe span
 	padding: 0;
 	height: 12px;
 	display: block;
-	background: #ffffff;
+	background: #35304E;
 }
 span.lowerframe
 {
 	padding: 0;
 	display: block;
-	background: #ffffff;
+	background: #35304E;
 	padding-left: 20px;
 }
 span.lowerframe span
@@ -1385,7 +1381,7 @@ span.lowerframe span
 	padding: 0;
 	height: 12px;
 	display: block;
-	background: #ffffff;
+	background: #35304E;
 }
 
 /* The main content area.
@@ -1488,7 +1484,7 @@ span.lowerframe span
 	font-weight: normal;
 	background: #fff;
 	padding: 3px;
-	border: 1px solid #604B91;
+	border: 1px solid #35304E;
 	top: 21px;
 	left: -5px;
 }
@@ -1525,7 +1521,7 @@ span.lowerframe span
 /* the hover effects */
 .dropmenu li a.firstlevel:hover, .dropmenu li:hover a.firstlevel
 {
-	background: #604B91;
+	background: #35304E;
 	color: #fff;
 	cursor: pointer;
 	text-decoration: none;
@@ -1536,7 +1532,7 @@ span.lowerframe span
 }
 .dropmenu li a.firstlevel:hover span.firstlevel, .dropmenu li:hover a.firstlevel span.firstlevel
 {
-	background: #604B91;
+	background: #35304E;
 	border-top-left-radius: 1px;
 	z-index: 200;
 	transition: background 100ms ease-in;
@@ -1605,12 +1601,12 @@ span.lowerframe span
 	margin-left: 2px;
 	cursor: pointer;
 	border-radius: 2px;
-	border-bottom: 1px solid #604B91;
+	border-bottom: 1px solid #35304E;
 	transition: background 100ms ease-in;
 }
 .buttonlist ul li a:hover
 {
-	background: #604B91;
+	background: #35304E;
 	color: #fff;
 	text-decoration: none;
 	transition: background 100ms ease-in;
@@ -1627,7 +1623,7 @@ span.lowerframe span
 }
 .buttonlist ul li a:hover span
 {
-	background: #604B91;
+	background: #35304E;
 	transition: background 100ms ease-in;
 }
 /* the active one */
@@ -1680,13 +1676,13 @@ ul#navigation li
 /* the framing graphics */
 #header
 {
-	background: #ffffff;
+	background: #35304E;
 	padding-left: 20px;
 	height: 96px;
 }
 #header div.frame
 {
-	background: #ffffff;
+	background: #35304E;
 	display: block;
 	padding: 0px 20px 1em 0;
 	height: 96px;
@@ -1694,12 +1690,12 @@ ul#navigation li
 /* the content section */
 #content_section
 {
-	background: #ffffff;
+	background: #35304E;
 	padding-left: 20px;
 }
 #content_section div.frame
 {
-	background: #ffffff;
+	background: #35304E;
 	display: block;
 	padding: 0 20px 0 0;
 }
@@ -1825,7 +1821,6 @@ div#upper_section div.news form
 	margin: 0;
 	font-size: 0.9em;
 	padding: 1em 0 0.5em 0;
-	border-top: 1px solid #ccc;
 	overflow: hidden;
 	list-style: none;
 	clear: both;
@@ -1846,7 +1841,7 @@ div#upper_section div.news form
 #footer_section
 {
 	text-align: center;
-	background: #ffffff;
+	background: #35304E;
 	padding-left: 20px;
 }
 #footer_section span.smalltext
@@ -1855,7 +1850,7 @@ div#upper_section div.news form
 }
 #footer_section div.frame
 {
-	background: #ffffff;
+	background: #35304E;
 	display: block;
 	padding: 10px 0 0 0;
 }
@@ -2004,6 +1999,9 @@ p.moderators
 #upshrinkHeaderIC
 {
 	margin-top: 4px;
+	background: #292734;
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
 }
 dl#ic_recentposts
 {
@@ -2028,7 +2026,7 @@ dl#ic_recentposts dd
 {
 	margin: 0;
 	padding: 0.5em;
-	border-top: 2px dotted #bbb;
+	border-top: 1px dotted #111;
 }
 #upshrinkHeaderIC p.inline
 {
@@ -2080,11 +2078,11 @@ img.new_posts
 div.table_frame .table_list
 {
 	border-collapse: collapse;
-	margin: 2px 0;
+	margin: 0px;
 }
 .table_frame .table_list td.icon, .table_frame .table_list td.info, .table_frame .table_list td.stats
 {
-	border-right: 2px solid white;
+	border-right: 0px solid white;
 }
 #messageindex
 {
@@ -2244,7 +2242,7 @@ div#pollmoderation
 #forumposts
 {
 	clear: both;
-	background: #fff;
+	background: #35304E;
 	border-radius: 4px;
 }
 #forumposts .cat_bar
@@ -2471,9 +2469,9 @@ img.smiley
 }
 
 #forumposts div.windowbg, #forumposts div.windowbg2 {
-	margin: 5px 10px 10px 10px;
-	background: #fff url(../images/rmrk7/postbg.png) top left no-repeat;
-	box-shadow: 2px 2px 5px #a0a0a0;
+	margin: 0px;
+	background: url(../images/rmrk7/postbg.png) top left no-repeat;
+	box-shadow: 2px 2px 5px #111;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 	padding-top: 5px;
@@ -3090,10 +3088,6 @@ tr.windowbg td, tr.windowbg2 td, tr.approvebg td, tr.highlight2 td
 {
 	margin: 0;
 }
-.topic_table table thead
-{
-	border-bottom: 1px solid #fff;
-}
 /* the subject column */
 .topic_table td
 {
@@ -3243,7 +3237,7 @@ dl
 	overflow: auto;
 	margin: 0 0 18px 0;
 	padding: 0 0 15px 0;
-	border-bottom: 1px #ccc solid;
+	border-bottom: 1px #555 solid;
 }
 #detailedinfo div.content dt, #tracking div.content dt
 {
