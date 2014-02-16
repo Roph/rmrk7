@@ -102,7 +102,7 @@ div.postbit {
 
 div.postbit-header, div.postbit-header-op {
 	padding: 2px 2px 2px 8px;
-	background: #C6BDDC;
+	background: #546075;
 	position: relative;
 	border-top-right-radius: 2px;
 	margin-bottom: 4px;
@@ -115,7 +115,7 @@ div.postbit-header, div.postbit-header-op {
 	left: 0;
 	border-width: 12px 12px 0 0;
 	border-style: solid;
-	border-color: #fff #C6BDDC;
+	border-color: #292734 #546075;
 }
 
 .postbit-header-op:before {
@@ -125,7 +125,7 @@ div.postbit-header, div.postbit-header-op {
 	left: 0;
 	border-width: 12px 12px 0 0;
 	border-style: solid;
-	border-color: #2089EC #C6BDDC;
+	border-color: #2089EC #546075;
 }
 
 div.postbit-header img.gender, div.postbit-header-op img.gender {
@@ -134,14 +134,14 @@ div.postbit-header img.gender, div.postbit-header-op img.gender {
 }
 
 div.postbit-container {
-	background: #D2CBE3;
+	background: #39364A;
 	padding-bottom: 10px;
 }
 
 div.postbit-avatar {
 	height: 160px;
 	width: 160px;
-	background: url(../images/rmrk7/avatarbg.png) center center no-repeat;
+	background: url(../images/_dark/avatarbg.png) center center no-repeat;
 	text-align: center;
 }
 
@@ -204,7 +204,7 @@ div.keyinfo a.postlink {
 
 span.boardtotals {
 	font-size: 85%;
-	color: #666;
+	color: #fff;
 }
 
 div.topictitle {
@@ -242,13 +242,13 @@ span.topicstats {
 span.board_description {
 	font-size: 50%;
 	clear: both;
-	color: #666;
+	color: #ccc;
 	font-weight: normal;
 }
 
 span.messageindex_columnheaders {
 	font-size: 80%;
-	color: #666;
+	color: #ccc;
 }
 
 span.messageindex_columnheaders a {
@@ -379,9 +379,9 @@ form
 input, button, select, textarea
 {
 	font: 95%/115% verdana, Helvetica, sans-serif;
-	color: #000;
-	background: #fff;
-	border: 1px solid #999;
+	color: #eee;
+	background: #302C43;
+	border: 1px solid #4F4C65;
 	padding: 2px;
 }
 
@@ -408,8 +408,8 @@ textarea
 {
 	cursor: pointer;
 	font-size: 1.1em;
-	color: #000;
-	background: #CFC7E1;
+	color: #fff;
+	background: #504175;
 	padding: 1px 3px;
 	margin-left: 2px;
 	cursor: pointer;
@@ -474,7 +474,7 @@ hr, .hrcolor
 /* By default set the color on these tags as #000. */
 h1, h2, h3, h4, h5, h6
 {
-	color: #000;
+	color: #ddd;
 	font-size: 1em;
 	margin: 0;
 	padding: 0;
@@ -615,24 +615,24 @@ ul.reset, ul.reset li
 blockquote.bbc_standard_quote, blockquote.bbc_alternate_quote
 {
 	font-size: 98%;
-	color: #000;
+	color: #eee;
 	line-height: 1.4em;
 	background: url(../images/theme/quote.png) 0.1em 0.1em no-repeat;
-	border: 1px solid #C7BEDC;
+	border: 1px solid #83838C;
 	padding: 1.1em 1.4em;
 	margin: 0.1em 0 0.3em 0;
 	overflow: auto;
-	border-left: 3px solid #C7BEDC;
+	border-left: 3px solid #83838C;
 }
 
 /* Alterate blockquote stylings */
 blockquote.bbc_standard_quote
 {
-	background-color: #dedede;
+	background-color: #515261;
 }
 blockquote.bbc_alternate_quote
 {
-	background-color: #e7e7e7;
+	background-color: #515261;
 }
 
 /* A code block - maybe PHP ;). */
@@ -641,7 +641,7 @@ code.bbc_code
 	display: block;
 	font-family: "dejavu sans mono", "monaco", "lucida console", "courier new", monospace;
 	font-size: x-small;
-	background: #eef;
+	background: #555;
 	border: 1px solid #999;
 	border-left: 3px solid #999;
 	line-height: 1.5em;
@@ -655,8 +655,8 @@ code.bbc_code
 /* The "Quote:" and "Code:" header parts... */
 .codeheader, .quoteheader
 {
-	color: #666;
-	font-size: 110%;
+	color: #999;
+	font-size: 120%;
 	font-weight: bold;
 	padding: 0 0.3em;
 }
@@ -670,12 +670,12 @@ code.bbc_code
 /* Styling for BBC tags */
 .bbc_link:link, .bbc_link:visited
 {
-	border-bottom: 1px solid #A8B6CF;
+	border-bottom: 1px solid #333;
 }
 .bbc_link:hover
 {
 	text-decoration: none;
-	border-bottom: 1px solid #346;
+	border-bottom: 1px solid #666;
 }
 .bbc_size
 {
@@ -745,17 +745,17 @@ code.bbc_code
 
 .titlebg, .titlebg2, tr.titlebg th, tr.titlebg td, tr.titlebg2 td
 {
-	color: #222;
+	color: #ccc;
 	font-size: 1.1em;
 	font-weight: bold;
-	background: #fff;
+	background: #586073;
 }
 .catbg, .catbg2, tr.catbg td, tr.catbg2 td, tr.catbg th, tr.catbg2 th
 {
-	color: #111;
+	color: #ccc;
 	font-size: 1.1em;
 	font-weight: bold;
-	background: #fff;
+	background: #586073;
 }
 
 /* adjust the table versions of headers */
@@ -840,22 +840,22 @@ div.pagesection div.floatright input
 /* Sticky topics get a different background */
 .stickybg
 {
-	background: #E1DCED;
+	background: #322B46;
 }
 .stickybg2
 {
-	background: #E1DCED;
+	background: #322B46;
 }
 
 /* Locked posts get a different shade, too! */
 .lockedbg
 {
-	background: #ccc;
+	background: #323041;
 	font-style: italic;
 }
 .lockedbg2
 {
-	background: #ccc;
+	background: #323041;
 	font-style: italic;
 }
 
@@ -950,9 +950,10 @@ a.moderation_link, a.moderation_link:visited
 	padding: 0.5em 1em;
 	font-size: 0.9em;
 	line-height: 1.4em;
-	border: 1px solid #bbb;
-	background: #f5f5f0;
-	margin: 0.2em 1px 1em 1px;
+	border: 1px solid #222;
+	background: #31364D;
+	margin: 0.2em 1px 5px 1px;
+	border-radius: 2px;
 }
 .description_board
 {
@@ -965,7 +966,7 @@ a.moderation_link, a.moderation_link:visited
 	padding: 0.5em 1em;
 	font-size: 0.9em;
 	line-height: 1.3em;
-	border: 1px solid #bbb;
+	border: 1px solid #444;
 	background: #f0f6f0;
 	margin: 0.2em 1px 1em 1px;
 }
@@ -1190,7 +1191,7 @@ table.table_list a.collapse
 .table_grid tr.catbg, .table_grid tr.titlebg
 {
 	font-size: 0.95em;
-	border-bottom: 1px solid #fff;
+	border-bottom: 1px solid #222;
 }
 .table_grid tr.catbg th, .table_grid tr.titlebg th
 {
@@ -1199,19 +1200,19 @@ table.table_list a.collapse
 }
 tr.catbg th.first_th
 {
-	background: #ffffff;
+	background: #586073;
 }
 tr.catbg th.last_th
 {
-	background: #ffffff;
+	background: #586073;
 }
 tr.titlebg th.first_th
 {
-	background: #ffffff;
+	background: #586073;
 }
 tr.titlebg th.last_th
 {
-	background: #ffffff;
+	background: #586073;
 }
 .table_grid th.last_th input
 {
@@ -1433,7 +1434,7 @@ span.lowerframe span
 	line-height: 1em;
 	padding: 0;
 	margin: 0;
-	box-shadow: 0px 0px 5px #000;
+	box-shadow: 0px 10px 30px #000;
 	border-radius: 2px;
 }
 .dropmenu
@@ -1443,7 +1444,7 @@ span.lowerframe span
 .dropmenu a
 {
 	display: block;
-	color: #000;
+	color: #fff;
 	text-decoration: none;
 }
 .dropmenu a span
@@ -1482,9 +1483,9 @@ span.lowerframe span
 	position: absolute;
 	width: 19.2em;
 	font-weight: normal;
-	background: #fff;
+	background: #251D39;
 	padding: 3px;
-	border: 1px solid #35304E;
+	border: 1px solid #000;
 	top: 21px;
 	left: -5px;
 }
@@ -1506,7 +1507,7 @@ span.lowerframe span
 /* the active button */
 .dropmenu li a.active
 {
-	background: #413363;
+	background: #504175;
 	color: #fff;
 	font-weight: bold;
 	border-top-right-radius: 1px;
@@ -1514,14 +1515,14 @@ span.lowerframe span
 }
 .dropmenu li a.active span.firstlevel
 {
-	background: #413363;
+	background: #504175;
 	border-top-left-radius: 1px;
 	transition: background 100ms ease-in;
 }
 /* the hover effects */
 .dropmenu li a.firstlevel:hover, .dropmenu li:hover a.firstlevel
 {
-	background: #35304E;
+	background: #000;
 	color: #fff;
 	cursor: pointer;
 	text-decoration: none;
@@ -1532,7 +1533,7 @@ span.lowerframe span
 }
 .dropmenu li a.firstlevel:hover span.firstlevel, .dropmenu li:hover a.firstlevel span.firstlevel
 {
-	background: #35304E;
+	background: #000;
 	border-top-left-radius: 1px;
 	z-index: 200;
 	transition: background 100ms ease-in;
@@ -1540,8 +1541,8 @@ span.lowerframe span
 /* the hover effects on level2 and 3 */
 .dropmenu li li a:hover, .dropmenu li li:hover>a
 {
-	background: #D2CBE3;
-	color: #000;
+	background: #000;
+	color: #fff;
 	text-decoration: none;
 	border-radius: 2px;
 }
@@ -1595,25 +1596,25 @@ span.lowerframe span
 {
 	display: block;
 	font-size: 1.1em;
-	color: #000;
-	background: #CFC7E1;
+	color: #ccc;
+	background: #504175;
 	padding: 2px 0px 2px 8px;
 	margin-left: 2px;
 	cursor: pointer;
 	border-radius: 2px;
-	border-bottom: 1px solid #35304E;
+	border-bottom: 1px solid #444;
 	transition: background 100ms ease-in;
 }
 .buttonlist ul li a:hover
 {
-	background: #35304E;
+	background: #413363;
 	color: #fff;
 	text-decoration: none;
 	transition: background 100ms ease-in;
 }
 .buttonlist ul li a span
 {
-	background: #CFC7E1;
+	background: #504175;
 	display: block;
 	height: 19px;
 	line-height: 19px;
@@ -1623,7 +1624,7 @@ span.lowerframe span
 }
 .buttonlist ul li a:hover span
 {
-	background: #35304E;
+	background: #413363;
 	transition: background 100ms ease-in;
 }
 /* the active one */
@@ -2470,13 +2471,14 @@ img.smiley
 
 #forumposts div.windowbg, #forumposts div.windowbg2 {
 	margin: 0px;
-	background: url(../images/rmrk7/postbg.png) top left no-repeat;
+	background: #292734 url(../images/rmrk7/postbg.png) top left no-repeat;
 	box-shadow: 2px 2px 5px #111;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 	padding-top: 5px;
 	padding-left: 5px;
 	padding-bottom: 5px;
+	color: #ccc;
 }
 
 .attachments hr

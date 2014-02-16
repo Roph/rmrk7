@@ -102,7 +102,7 @@ div.postbit {
 
 div.postbit-header, div.postbit-header-op {
 	padding: 2px 2px 2px 8px;
-	background: #C6BDDC;
+	background: #CAC7D3;
 	position: relative;
 	border-top-right-radius: 2px;
 	margin-bottom: 4px;
@@ -115,7 +115,7 @@ div.postbit-header, div.postbit-header-op {
 	left: 0;
 	border-width: 12px 12px 0 0;
 	border-style: solid;
-	border-color: #fff #C6BDDC;
+	border-color: #EEEDEF #CAC7D3;
 }
 
 .postbit-header-op:before {
@@ -125,7 +125,7 @@ div.postbit-header, div.postbit-header-op {
 	left: 0;
 	border-width: 12px 12px 0 0;
 	border-style: solid;
-	border-color: #2089EC #C6BDDC;
+	border-color: #2089EC #CAC7D3;
 }
 
 div.postbit-header img.gender, div.postbit-header-op img.gender {
@@ -134,7 +134,7 @@ div.postbit-header img.gender, div.postbit-header-op img.gender {
 }
 
 div.postbit-container {
-	background: #D2CBE3;
+	background: #DDDBE3;
 	padding-bottom: 10px;
 }
 
@@ -2471,7 +2471,7 @@ img.smiley
 
 #forumposts div.windowbg, #forumposts div.windowbg2 {
 	margin: 5px 10px 10px 10px;
-	background: #fff url(../images/rmrk7/postbg.png) top left no-repeat;
+	background: #EEEDEF url(../images/rmrk7/postbg.png) top left no-repeat;
 	box-shadow: 2px 2px 5px #a0a0a0;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
