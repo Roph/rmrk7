@@ -250,7 +250,7 @@ function template_body_above()
 				if (!empty($context['user']['avatar']))
 				{
 					$context['user']['avatar']['image'] = strtr($context['user']['avatar']['image'], array("class=\"avatar\"" => "class=\"avatar_t\""));
-				echo '<img src="',$context['user']['avatar']['href'],'" alt="avatar" style="float:left; margin-left: 7px; margin-right: 6px; max-height:37px;" class="avatar" alt="Avatar"/>';
+				echo '<img src="',$context['user']['avatar']['href'],'" alt="avatar" style="float:left; margin-left: 11px; margin-right: 6px; max-height:37px;" class="avatar" alt="Avatar"/>';
 				} else echo '<a href="' . $scripturl . '?action=profile;u=', $context['user']['id'], ';sa=forumProfile"><img src="' . $settings['images_url'] . '/rmrk7/noavatar.png" class="avatar" alt="missing avatar" width="26" height="37" style="float:left; padding-right:2px;"/></a>';
 				
 				//In case you forgot, this is your name. It's also an easy link to your profile.
@@ -260,6 +260,10 @@ function template_body_above()
 				if ($context['user']['unread_messages'] > 0) {
 					echo '<a href="',$scripturl,'?action=pm"><img src="' . $settings['images_url'] . '/rmrk7/pm_new.png" alt="new messages" /></a>';
 				} else echo '<a href="',$scripturl,'?action=pm"><img src="' . $settings['images_url'] . '/rmrk7/pm_none.png" alt="new messages" /></a>';
+				
+				//A...pokeball?
+				if ($scripturl == "http://rmrk.net/index.php") echo ' | <a href="http://rmrk.net/pokemon/?trainer='.$context['user']['id'].'"><img src="'.$settings['images_url'].'/rmrk7/pokeball.png" alt="Pokemon" /></a>';
+				elseif ($scripturl == "http://127.0.0.1/rmrk7/index.php") echo ' | <a href="http://127.0.0.1/rmrk7/pokemon/?trainer='.$context['user']['id'].'"><img src="'.$settings['images_url'].'/rmrk7/pokeball.png" alt="Pokemon" /></a>';
 				
 				//Give them the classic, server stressing unread links.
 				echo ' | <a href="' . $scripturl . '?action=unread">Unread Posts</a> | 
@@ -398,7 +402,15 @@ function template_body_below()
 		<div id="quicklinks">
 			<span><a href="http://wiki.rmrk.net"><img src="',$settings['images_url'],'/rmrk7/icon_wiki.png" alt=""/>RMRK Wiki</a></span>
 			<span><a href="',$scripturl,'?action=chat"><img src="',$settings['images_url'],'/rmrk7/icon_irc.png" alt=""/>IRC Chat</a></span>
-			<span><a href="',$scripturl,'?action=donate" style="color:#007300;"><img src="',$settings['images_url'],'/rmrk7/icon_server.png" alt=""/>Donations</a></span>
+			<span><a href="',$scripturl,'?action=donate" style="color:#007300;"><img src="',$settings['images_url'],'/rmrk7/icon_server.png" alt=""/>Donations</a></span>';
+			if ($context['user']['is_logged']) {
+				if ($context['theme_variant'] == "_light") echo '<span><a href="',$scripturl,'?action=theme;sa=pick;u='.$context['user']['id'].';th='.$settings['theme_id'].';'.$context['session_var'].'='.$context['session_id'].';vrt=dark"><img src="',$settings['images_url'],'/rmrk7/switch_dark.png" alt=""/>Dark Style</a></span>';
+			elseif ($context['theme_variant'] == "_dark") echo '<span><a href="',$scripturl,'?action=theme;sa=pick;u='.$context['user']['id'].';th='.$settings['theme_id'].';'.$context['session_var'].'='.$context['session_id'].';vrt=light"><img src="',$settings['images_url'],'/rmrk7/switch_light.png" alt=""/>Light Style</a></span>';
+			} else {
+				if ($context['theme_variant'] == "_light") echo '<span><a href="',$scripturl,'?theme='.$settings['theme_id'].';vrt=dark"><img src="',$settings['images_url'],'/rmrk7/switch_dark.png" alt=""/>Dark Style</a></span>';
+			elseif ($context['theme_variant'] == "_dark") echo '<span><a href="',$scripturl,'?theme='.$settings['theme_id'].';vrt=light"><img src="',$settings['images_url'],'/rmrk7/switch_light.png" alt=""/>Light Style</a></span>';
+			}
+			echo '
 		</div>
 		
 		<ul class="reset">

@@ -422,7 +422,12 @@ function template_main()
 		echo '
 			<div class="postbit">
 				<div class="postbit-container">
-					<div class="postbit-header',$message['member']['is_topic_starter'] ? '-op' : '','">
+					<div class="postbit-header',$message['member']['is_topic_starter'] ? '-op' : '','">';
+					
+						if ($scripturl == "http://rmrk.net/index.php") echo '<a href="http://rmrk.net/pokemon/?trainer='.$message['member']['id'].'" style="float:left;opacity: 0.2;"><img src="'.$settings['images_url'].'/rmrk7/pokeball.png" alt="pokeball" /></a>';
+						elseif ($scripturl == "http://127.0.0.1/rmrk7/index.php") echo '<a href="http://127.0.0.1/rmrk7/pokemon/?trainer='.$message['member']['id'].'" style="float:left;opacity: 0.2;"><img src="'.$settings['images_url'].'/rmrk7/pokeball.png" alt="pokeball" /></a>';
+					
+						echo'
 						<a href="',$scripturl,'?action=profile;u=',$message['member']['id'],'" title="',$message['member']['username'],'">',$message['member']['name'],'</a><img src="',$message['member']['online']['image_href'],'" alt="',$message['member']['online']['text'],'" title="',$message['member']['online']['text'],'" style="padding-left: 1px;" />',empty($message['member']['gender']['image']) ? '' : $message['member']['gender']['image'],'
 					</div>
 					<div class="postbit-avatar">
@@ -512,6 +517,7 @@ function template_main()
 						}
 						
 					}
+					
 				
 		//Experimental level bar.
 		
@@ -520,6 +526,31 @@ function template_main()
 				</div>';
 		
 		//RMRK7 Postbit End
+		
+		//RMRKMon Random Encounters. We may want to have special case higher chances.
+		$pokemonchance = 1;
+		if ($context['current_board'] == 270) $pokemonchance = ($pokemonchance + 3);
+		
+		if ($context['user']['is_logged'] && (mt_rand(0, 100) < $pokemonchance) && !$seen_pokemon) { //We're not showing multiple per page.
+			
+			//We have to secure this somehow.
+			$pokemonkey = md5(date('jg').$context['user']['id']);
+			
+			//While in development, we need this distinction.
+			if ($scripturl == "http://127.0.0.1/rmrk7/index.php") {
+				echo '<div id="pokemon"></div>
+				<script type="text/javascript">
+					$( "#pokemon" ).load( "Pokemon/?ajax=random_encounter&key='.$pokemonkey.'&sesc=',$context['session_id'],'" );
+				</script>';
+			} else {
+				echo '<div id="pokemon"></div>
+				<script type="text/javascript">
+					$( "#pokemon" ).load( "/pokemon/?ajax=random_encounter&key='.$pokemonkey.'&sesc=',$context['session_id'],'" );
+				</script>';
+			}
+			
+			$seen_pokemon = true;
+		}
 		
 
 		// Done with the information about the poster... on to the post itself.
